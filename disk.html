@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory & File I/O Management</title>
+  <style>
+    :root {
+      --primary: #0ea5e9;
+      --secondary: #10b981;
+      --background: #f8fafc;
+      --foreground: #0f172a;
+      --card: #ffffff;
+      --card-border: #e2e8f0;
+      --muted: #f1f5f9;
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      --primary: #38bdf8;
+      --secondary: #34d399;
+      --background: #0f172a;
+      --foreground: #f8fafc;
+      --card: #1e293b;
+      --card-border: #334155;
+      --muted: #1e293b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      padding-bottom: 2rem;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    h1, h2, h3 {
+      margin-bottom: 1rem;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    .card {
+      background-color: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      background-color: var(--card);
+      color: var(--foreground);
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: auto;
+      padding: 0.5rem;
+    }
+
+    .result {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: var(--muted);
+      border-radius: var(--radius);
+      word-wrap: break-word;
+    }
+
+    details {
+      background-color: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      border: 1px solid var(--card-border);
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    th {
+      background-color: var(--muted);
+    }
+
+    .chart-container {
+      height: 300px;
+      position: relative;
+      margin-top: 1rem;
+    }
+
+    .chart-point {
+      position: absolute;
+      height: 10px;
+      width: 10px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .chart-line {
+      position: absolute;
+      height: 2px;
+      background-color: var(--primary);
+      transform-origin: left center;
+    }
+
+    .chart-axis {
+      position: absolute;
+      left: 40px;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      background-color: var(--foreground);
+    }
+
+    .chart-axis-x {
+      position: absolute;
+      left: 40px;
+      bottom: 0;
+      height: 2px;
+      width: calc(100% - 40px);
+      background-color: var(--foreground);
+    }
+
+    .tab-container {
+      margin-bottom: 1rem;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .tab-button {
+      padding: 0.75rem 1rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--foreground);
+      border-bottom: 2px solid transparent;
+      width: auto;
+    }
+
+    .tab-button.active {
+      border-bottom: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 1rem 0;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    :root {
+      --primary: #0ea5e9;
+      --secondary: #10b981;
+      --background: #f8fafc;
+      --foreground: #0f172a;
+      --card: #ffffff;
+      --card-border: #e2e8f0;
+      --muted: #f1f5f9;
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      --primary: #38bdf8;
+      --secondary: #34d399;
+      --background: #0f172a;
+      --foreground: #f8fafc;
+      --card: #1e293b;
+      --card-border: #334155;
+      --muted: #1e293b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      padding-bottom: 2rem;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    nav {
+      margin-top: 0.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 1rem;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">OS Concepts</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="disk.html">Disk Scheduling</a>
+    </nav>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  </header>
+
+  <div class="container">
+    <div class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab(event, 'disk-scheduling')">Disk Scheduling</button>
+        <button class="tab-button" onclick="openTab(event, 'page-replacement')">Page Replacement</button>
+        <button class="tab-button" onclick="openTab(event, 'memory-concepts')">Memory Concepts</button>
+        <button class="tab-button" onclick="openTab(event, 'file-management')">File Management</button>
+      </div>
+
+      <!-- Disk Scheduling Tab -->
+      <div id="disk-scheduling" class="tab-content active">
+        <div class="card">
+          <div class="card-header">
+            <h2>Disk Scheduling Algorithm Calculator</h2>
+            <p>Calculate and visualize different disk scheduling algorithms</p>
+          </div>
+          <div class="card-content">
+            <div class="grid">
+              <div>
+                <div class="form-group">
+                  <label for="head-position">Initial Head Position</label>
+                  <input type="number" id="head-position" value="50" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="disk-size">Disk Size</label>
+                  <input type="number" id="disk-size" value="199" min="100" max="1000">
+                </div>
+                <div class="form-group">
+                  <label for="request-queue">Request Queue (comma separated)</label>
+                  <input type="text" id="request-queue" value="98,183,37,122,14,124,65,67">
+                </div>
+                <div class="form-group">
+                  <label for="algorithm">Select Algorithm</label>
+                  <select id="algorithm">
+                    <option value="FCFS">FCFS (First-Come First-Served)</option>
+                    <option value="SSTF">SSTF (Shortest Seek Time First)</option>
+                    <option value="SCAN">SCAN (Elevator Algorithm)</option>
+                    <option value="CSCAN">C-SCAN (Circular SCAN)</option>
+                  </select>
+                </div>
+                <button onclick="calculateDiskScheduling()">Calculate</button>
+                <div id="disk-result" class="result"></div>
+              </div>
+              <div class="chart-container" id="disk-chart">
+                <div class="chart-axis"></div>
+                <div class="chart-axis-x"></div>
+                <!-- Chart will be rendered here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Replacement Tab -->
+      <div id="page-replacement" class="tab-content">
+        <div class="card">
+          <div class="card-header">
+            <h2>Memory Page Replacement Calculator</h2>
+            <p>Calculate and visualize page replacement algorithms</p>
+          </div>
+          <div class="card-content">
+            <div class="form-group">
+              <label for="page-reference">Page Reference String (comma separated)</label>
+              <input type="text" id="page-reference" value="7,0,1,2,0,3,0,4,2,3,0,3,2,1,2">
+            </div>
+            <div class="form-group">
+              <label for="frame-count">Number of Frames</label>
+              <input type="number" id="frame-count" value="3" min="1" max="10">
+            </div>
+            <div class="form-group">
+              <label for="page-algorithm">Select Algorithm</label>
+              <select id="page-algorithm">
+                <option value="FIFO">FIFO (First-In First-Out)</option>
+                <option value="LRU">LRU (Least Recently Used)</option>
+                <option value="Optimal">Optimal</option>
+              </select>
+            </div>
+            <button onclick="calculatePageReplacement()">Calculate</button>
+            <div id="page-result" class="result"></div>
+            <div id="page-table-container"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Memory Concepts Tab -->
+      <div id="memory-concepts" class="tab-content">
+        <details open>
+          <summary>Memory Management</summary>
+          <p><strong>Basic Concept:</strong> Memory management is responsible for managing a computer's primary memory. It keeps track of each byte in memory and allocates memory to processes as needed.</p>
+          <p><strong>Logical and Physical Address Map:</strong> Logical addresses are generated by the CPU, while physical addresses point to actual locations in memory. The Memory Management Unit (MMU) translates logical to physical addresses.</p>
+          <p><strong>Contiguous Memory Allocation:</strong> This involves allocating a single contiguous block of memory to a process. Fixed partitioning divides memory into fixed sizes, whereas variable partitioning allows different sizes. It may cause internal (unused space inside a partition) or external (unused space between partitions) fragmentation. Compaction helps by shuffling processes to combine free memory.</p>
+          <p><strong>Paging:</strong> Memory is divided into fixed-size pages and frames. The CPU generates page numbers and offsets. A page table maps pages to frames. Hardware like TLBs (Translation Lookaside Buffers) supports fast mapping. Protection and sharing mechanisms prevent illegal access and allow shared memory segments.</p>
+          <p><strong>Segmentation:</strong> Unlike paging, segmentation divides memory logically into code, stack, and data segments. Each segment has a base and limit, aiding in protection and logical separation.</p>
+          <p><strong>Virtual Memory:</strong> Allows processes to use more memory than physically available. It relies on techniques like demand paging where pages are loaded only when required. Key concepts include page fault, working set, dirty page, and locality of reference.</p>
+          <p><strong>Page Replacement Algorithms:</strong> - <strong>Optimal</strong>: Replaces the page not used for longest future time. - <strong>FIFO</strong>: Replaces the oldest loaded page. - <strong>LRU</strong>: Replaces the least recently used page.</p>
+        </details>
+      </div>
+
+      <!-- File Management Tab -->
+      <div id="file-management" class="tab-content">
+        <details open>
+          <summary>File & I/O Management</summary>
+          <p><strong>File Concept:</strong> A file is a named collection of data. File management involves creating, reading, writing, and organizing files.</p>
+          <p><strong>Access Methods:</strong> Sequential (line-by-line) and Direct access (jump to a location).</p>
+          <p><strong>File Types & Operations:</strong> Text, binary, executable. Operations include create, open, read, write, delete, and close.</p>
+          <p><strong>Directory Structure:</strong> Single-level, two-level, tree-structured, acyclic graph, and general graph directory structures organize files efficiently.</p>
+          <p><strong>File System Structure:</strong> Includes boot block, superblock, inode table, and data blocks.</p>
+          <p><strong>Allocation Methods:</strong> - Contiguous: Easy but may lead to fragmentation. - Linked: Overhead of pointers. - Indexed: Uses index block for fast access.</p>
+          <p><strong>Free Space Management:</strong> Bitmaps (bit vector), linked lists, and grouping help track free disk space.</p>
+          <p><strong>File Recovery:</strong> Helps restore deleted or corrupted files using journaling or backup techniques.</p>
+
+          <h3>I/O Management</h3>
+          <p><strong>I/O Hardware:</strong> Includes I/O devices, device controllers, and direct memory access (DMA) modules.</p>
+          <p><strong>I/O Software:</strong> Includes interrupt handlers (detect hardware signals), device drivers (interface between OS and hardware).</p>
+          <p><strong>Disk Scheduling Algorithms:</strong> Decide order of disk access to improve performance.</p>
+          <ul>
+            <li><strong>FCFS</strong> – Serve requests in arrival order.</li>
+            <li><strong>SSTF</strong> – Serve nearest track request.</li>
+            <li><strong>SCAN</strong> – Elevator algorithm: move inward, then reverse.</li>
+            <li><strong>C-SCAN</strong> – Like SCAN, but always move one direction and jump back.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme switching
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      const themeButton = document.querySelector('.theme-toggle');
+      if (document.body.classList.contains('dark')) {
+        themeButton.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeButton.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    // Initialize theme from localStorage
+    if (localStorage.getItem('theme') === 'dark' || 
+        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.body.classList.add('dark');
+      document.querySelector('.theme-toggle').textContent = '☀️';
+    }
+
+    // Tab functionality
+    function openTab(evt, tabName) {
+      const tabContents = document.getElementsByClassName("tab-content");
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+      }
+      
+      const tabButtons = document.getElementsByClassName("tab-button");
+      for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove("active");
+      }
+      
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+
+    // Disk Scheduling Calculation
+    function calculateDiskScheduling() {
+      const headPosition = parseInt(document.getElementById('head-position').value);
+      const diskSize = parseInt(document.getElementById('disk-size').value);
+      const requestInput = document.getElementById('request-queue').value;
+      const algorithm = document.getElementById('algorithm').value;
+      
+      // Parse requests
+      const requests = requestInput.split(',')
+        .map(r => parseInt(r.trim()))
+        .filter(r => !isNaN(r) && r >= 0 && r <= diskSize);
+      
+      if (requests.length === 0) {
+        document.getElementById('disk-result').textContent = "Please enter valid disk requests";
+        return;
+      }
+
+      let result;
+      switch (algorithm) {
+        case 'FCFS':
+          result = calculateFCFS(headPosition, requests);
+          break;
+        case 'SSTF':
+          result = calculateSSTF(headPosition, requests);
+          break;
+        case 'SCAN':
+          result = calculateSCAN(headPosition, requests, diskSize);
+          break;
+        case 'CSCAN':
+          result = calculateCSCAN(headPosition, requests, diskSize);
+          break;
+      }
+
+      // Display result
+      document.getElementById('disk-result').innerHTML = `
+        <strong>Sequence:</strong> ${headPosition} → ${result.sequence.join(" → ")}<br>
+        <strong>Total Head Movement:</strong> ${result.total}
+      `;
+
+      // Draw chart
+      drawDiskChart(headPosition, result.sequence, diskSize);
+    }
+
+    function calculateFCFS(initialHead, requests) {
+      let sequence = [...requests];
+      let total = 0;
+      let current = initialHead;
+
+      for (const request of sequence) {
+        total += Math.abs(current - request);
+        current = request;
+      }
+
+      return { sequence, total };
+    }
+
+    function calculateSSTF(initialHead, requests) {
+      let remaining = [...requests];
+      let sequence = [];
+      let total = 0;
+      let current = initialHead;
+
+      while (remaining.length > 0) {
+        // Find the closest request
+        let closest = remaining.reduce(
+          (prev, curr) => Math.abs(curr - current) < Math.abs(prev - current) ? curr : prev,
+          remaining[0]
+        );
+        
+        total += Math.abs(current - closest);
+        sequence.push(closest);
+        current = closest;
+        remaining = remaining.filter(r => r !== closest);
+      }
+
+      return { sequence, total };
+    }
+
+    function calculateSCAN(initialHead, requests, diskSize) {
+      let sequence = [];
+      let sortedRequests = [...requests].sort((a, b) => a - b);
+      let total = 0;
+      let current = initialHead;
+
+      // Find requests greater than or equal to initial head
+      const greaterRequests = sortedRequests.filter(r => r >= initialHead);
+      // Find requests less than initial head
+      const lessRequests = sortedRequests.filter(r => r < initialHead);
+
+      // SCAN goes up to the end of disk then reverses
+      const scanSequence = [...greaterRequests, diskSize, ...lessRequests.reverse()];
+
+      for (const request of scanSequence) {
+        total += Math.abs(current - request);
+        sequence.push(request);
+        current = request;
+      }
+
+      return { sequence, total };
+    }
+
+    function calculateCSCAN(initialHead, requests, diskSize) {
+      let sequence = [];
+      let sortedRequests = [...requests].sort((a, b) => a - b);
+      let total = 0;
+      let current = initialHead;
+
+      // Find requests greater than or equal to initial head
+      const greaterRequests = sortedRequests.filter(r => r >= initialHead);
+      // Find requests less than initial head
+      const lessRequests = sortedRequests.filter(r => r < initialHead);
+
+      // C-SCAN goes up to the end, jumps to beginning, then continues up
+      const scanSequence = [...greaterRequests, diskSize, 0, ...lessRequests];
+
+      for (const request of scanSequence) {
+        total += Math.abs(current - request);
+        sequence.push(request);
+        current = request;
+      }
+
+      return { sequence, total };
+    }
+
+    function drawDiskChart(initialHead, sequence, diskSize) {
+      const chartContainer = document.getElementById('disk-chart');
+      chartContainer.innerHTML = '<div class="chart-axis"></div><div class="chart-axis-x"></div>';
+      
+      const chartWidth = chartContainer.offsetWidth - 50;
+      const chartHeight = chartContainer.offsetHeight - 20;
+      const positions = [initialHead, ...sequence];
+      
+      // Calculate scaling
+      const scale = chartWidth / diskSize;
+      
+      // Create points and lines
+      for (let i = 0; i < positions.length; i++) {
+        // Create a point
+        const point = document.createElement('div');
+        point.className = 'chart-point';
+        point.style.left = (positions[i] * scale + 40) + 'px';
+        point.style.top = (i * (chartHeight / positions.length) + 10) + 'px';
+        point.title = positions[i];
+        chartContainer.appendChild(point);
+        
+        // Create a line to the next point if there is one
+        if (i < positions.length - 1) {
+          const line = document.createElement('div');
+          line.className = 'chart-line';
+          
+          const x1 = positions[i] * scale + 40;
+          const y1 = i * (chartHeight / positions.length) + 10;
+          const x2 = positions[i+1] * scale + 40;
+          const y2 = (i+1) * (chartHeight / positions.length) + 10;
+          
+          // Calculate line length and angle
+          const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+          const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+          
+          line.style.width = length + 'px';
+          line.style.transform = `translate(${x1}px, ${y1}px) rotate(${angle}deg)`;
+          
+          chartContainer.appendChild(line);
+        }
+      }
+      
+      // Add some markers for the disk positions
+      const markers = [0, Math.round(diskSize / 4), Math.round(diskSize / 2), Math.round(3 * diskSize / 4), diskSize];
+      markers.forEach(pos => {
+        const marker = document.createElement('div');
+        marker.style.position = 'absolute';
+        marker.style.bottom = '0';
+        marker.style.left = (pos * scale + 40) + 'px';
+        marker.style.transform = 'translateX(-50%)';
+        marker.style.fontSize = '12px';
+        marker.textContent = pos;
+        chartContainer.appendChild(marker);
+      });
+    }
+
+    // Page Replacement Calculation
+    function calculatePageReplacement() {
+      const pageReferenceInput = document.getElementById('page-reference').value;
+      const frameCount = parseInt(document.getElementById('frame-count').value);
+      const algorithm = document.getElementById('page-algorithm').value;
+      
+      // Parse page references
+      const pages = pageReferenceInput.split(',')
+        .map(p => parseInt(p.trim()))
+        .filter(p => !isNaN(p));
+      
+      if (pages.length === 0) {
+        document.getElementById('page-result').textContent = "Please enter valid page references";
+        return;
+      }
+
+      let result;
+      switch (algorithm) {
+        case 'FIFO':
+          result = calculateFIFO(pages, frameCount);
+          break;
+        case 'LRU':
+          result = calculateLRU(pages, frameCount);
+          break;
+        case 'Optimal':
+          result = calculateOptimal(pages, frameCount);
+          break;
+      }
+
+      // Display result
+      document.getElementById('page-result').innerHTML = `
+        <strong>Page Faults:</strong> ${result.pageFaults} out of ${pages.length} references<br>
+        <strong>Hit Rate:</strong> ${((pages.length - result.pageFaults) / pages.length * 100).toFixed(2)}%
+      `;
+
+      // Create table visualization
+      createPageTable(pages, result.frames, frameCount);
+    }
+
+    function calculateFIFO(pages, frameCount) {
+      const frames = [];
+      let currentFrames = Array(frameCount).fill(-1);
+      let pageFaults = 0;
+      let pointer = 0;
+
+      for (let i = 0; i < pages.length; i++) {
+        const page = pages[i];
+        // Save the state of frames before processing
+        frames.push([...currentFrames]);
+        
+        // Check if page is already in frame
+        if (!currentFrames.includes(page)) {
+          currentFrames[pointer] = page;
+          pointer = (pointer + 1) % frameCount;
+          pageFaults++;
+        }
+      }
+
+      // Add final state
+      frames.push([...currentFrames]);
+
+      return { frames, pageFaults };
+    }
+
+    function calculateLRU(pages, frameCount) {
+      const frames = [];
+      let currentFrames = Array(frameCount).fill(-1);
+      let pageFaults = 0;
+      let counter = {};
+
+      for (let i = 0; i < pages.length; i++) {
+        const page = pages[i];
+        // Save the state of frames before processing
+        frames.push([...currentFrames]);
+        
+        // Check if page is already in frame
+        if (!currentFrames.includes(page)) {
+          // If frames are not full yet
+          if (currentFrames.includes(-1)) {
+            const emptyIndex = currentFrames.indexOf(-1);
+            currentFrames[emptyIndex] = page;
+          } else {
+            // Find least recently used page
+            let lru = Infinity;
+            let lruIndex = 0;
+            
+            for (let j = 0; j < frameCount; j++) {
+              if (counter[currentFrames[j]] < lru) {
+                lru = counter[currentFrames[j]];
+                lruIndex = j;
+              }
+            }
+            
+            currentFrames[lruIndex] = page;
+          }
+          pageFaults++;
+        }
+        
+        // Update counter for the current page
+        counter[page] = i;
+      }
+
+      // Add final state
+      frames.push([...currentFrames]);
+
+      return { frames, pageFaults };
+    }
+
+    function calculateOptimal(pages, frameCount) {
+      const frames = [];
+      let currentFrames = Array(frameCount).fill(-1);
+      let pageFaults = 0;
+
+      for (let i = 0; i < pages.length; i++) {
+        const page = pages[i];
+        // Save the state of frames before processing
+        frames.push([...currentFrames]);
+        
+        // Check if page is already in frame
+        if (!currentFrames.includes(page)) {
+          // If frames are not full yet
+          if (currentFrames.includes(-1)) {
+            const emptyIndex = currentFrames.indexOf(-1);
+            currentFrames[emptyIndex] = page;
+          } else {
+            // Find page that will not be used for the longest time
+            const futurePages = pages.slice(i + 1);
+            let furthest = -1;
+            let furthestIndex = 0;
+            
+            for (let j = 0; j < frameCount; j++) {
+              const nextUse = futurePages.indexOf(currentFrames[j]);
+              if (nextUse === -1) {
+                // Page will not be used again
+                furthest = Infinity;
+                furthestIndex = j;
+                break;
+              } else if (nextUse > furthest) {
+                furthest = nextUse;
+                furthestIndex = j;
+              }
+            }
+            
+            currentFrames[furthestIndex] = page;
+          }
+          pageFaults++;
+        }
+      }
+
+      // Add final state
+      frames.push([...currentFrames]);
+
+      return { frames, pageFaults };
+    }
+
+    function createPageTable(pages, frames, frameCount) {
+      const tableContainer = document.getElementById('page-table-container');
+      tableContainer.innerHTML = '';
+      
+      const table = document.createElement('table');
+      // Create header row with page references
+      const headerRow = document.createElement('tr');
+      headerRow.appendChild(document.createElement('th')); // Empty corner cell
+      
+      pages.forEach(page => {
+        const th = document.createElement('th');
+        th.textContent = page;
+        headerRow.appendChild(th);
+      });
+      
+      table.appendChild(headerRow);
+      
+      // Create rows for frames
+      for (let i = 0; i < frameCount; i++) {
+        const row = document.createElement('tr');
+        
+        // Frame label
+        const frameLabel = document.createElement('td');
+        frameLabel.textContent = `Frame ${i + 1}`;
+        row.appendChild(frameLabel);
+        
+        // Frame values for each step
+        for (let j = 0; j < pages.length; j++) {
+          const td = document.createElement('td');
+          const value = frames[j][i];
+          td.textContent = value === -1 ? '-' : value;
+          
+          // Highlight page fault
+          if (j > 0 && frames[j][i] !== frames[j-1][i]) {
+            td.style.backgroundColor = 'var(--primary)';
+            td.style.color = 'white';
+          }
+          
+          row.appendChild(td);
+        }
+        
+        table.appendChild(row);
+      }
+      
+      tableContainer.appendChild(table);
+    }
+  </script>
+</body>
+</html>

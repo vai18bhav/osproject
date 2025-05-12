@@ -1,50 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Operating System Types</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OS Concepts - Operating Systems and Scheduling</title>
   <style>
-    :root {
-      --primary-color: #4f46e5;
-      --secondary-color: #818cf8;
-      --accent-color: #3b82f6;
-      --background-color: #f8fafc;
-      --card-bg: #ffffff;
-      --text-color: #1e293b;
-      --text-light: #64748b;
-      --border-radius: 12px;
-      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --transition: all 0.3s ease;
-    }
-
+    /* Base Styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     }
+    /* CSS for just the feedback form in the footer */
+.footer {
+  background-color: #f1f5f9;
+  padding: 3rem 2rem 1.5rem;
+  margin-top: 3rem;
+}
+/* CSS for Team Information Section */
+.team-info {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.team-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #334155;
+  text-align: center;
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.team-member {
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 0.8rem;
+  border: 3px solid #e5deff;
+}
+
+.member-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-member h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.member-role {
+  color: #7E69AB;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0.3rem 0;
+}
+
+.member-bio {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+.team-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.stat {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #9b87f5;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 640px) {
+  .team-members {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feedback-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.form-row.double {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .form-row.double {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.submit-btn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #4338ca;
+}
+
+.submit-btn:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+}
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--background-color);
-      color: var(--text-color);
+      background-color: #f7f7f9;
+      color: #1A1F2C;
       line-height: 1.6;
-      padding: 20px;
     }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
+    
+    /* Header */
     header {
-      text-align: center;
-      padding: 40px 0;
-      position: relative;
+      background-color: #1e40af;
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-
+    
+    .logo {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+      color: #93c5fd;
+    }
+    
+    /* Main Content */
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
     .gradient-text {
       background: linear-gradient(90deg, #4f46e5, #3b82f6);
       -webkit-background-clip: text;
@@ -52,735 +272,1643 @@
       color: transparent;
       display: inline-block;
     }
-
-    h1 {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
+    
     h2 {
+      color: #1e40af;
+      margin-bottom: 1rem;
       font-size: 1.8rem;
-      color: var(--primary-color);
-      margin-bottom: 16px;
     }
-
-    .subtitle {
-      font-size: 1.2rem;
-      color: var(--text-light);
-      max-width: 700px;
-      margin: 0 auto 40px;
+    
+    p {
+      margin-bottom: 1rem;
     }
-
-    .section, .os-section {
-      background: var(--card-bg);
-      margin: 30px auto;
-      padding: 30px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      transition: var(--transition);
+    
+    /* Accordion Styles */
+    .accordion {
+      margin: 2rem 0;
     }
-
-    .section:hover, .os-section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    .accordion-item {
+      background: #ffffff;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      overflow: hidden;
     }
-
-    .section-title {
-      font-size: 1.5rem;
+    
+    .accordion-header {
+      padding: 1rem;
       font-weight: 600;
-      padding: 15px 0;
       cursor: pointer;
-      color: var(--primary-color);
+      color: #4f46e5;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: var(--transition);
     }
-
-    .section-title::after {
-      content: "⌄";
-      font-size: 1.5rem;
-      transition: var(--transition);
-    }
-
-    .active .section-title::after {
-      transform: rotate(180deg);
-    }
-
-    .section-content {
+    
+    .accordion-content {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.6s ease;
+      padding: 0 1rem;
     }
-
-    .active .section-content {
+    
+    .accordion-item.active .accordion-content {
       max-height: 1500px;
+      padding: 0 1rem 1rem;
     }
-
-    p {
-      margin-bottom: 16px;
+    
+    .accordion-header::after {
+      content: "⌄";
+      font-size: 1.5rem;
+      transition: transform 0.3s;
     }
-
-    ul {
-      margin-left: 20px;
-      margin-bottom: 16px;
+    
+    .accordion-item.active .accordion-header::after {
+      transform: rotate(180deg);
     }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    .highlight {
-      background-color: rgba(79, 70, 229, 0.1);
-      border-left: 4px solid var(--primary-color);
-      padding: 15px;
-      margin: 20px 0;
-      border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    }
-
+    
+    /* Feature Grid */
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      margin: 20px 0;
+      gap: 1rem;
+      margin: 1.5rem 0;
     }
-
+    
     .feature-card {
       background-color: rgba(79, 70, 229, 0.05);
-      padding: 20px;
-      border-radius: var(--border-radius);
-      transition: var(--transition);
+      padding: 1.25rem;
+      border-radius: 8px;
+      transition: background-color 0.3s;
     }
-
+    
     .feature-card:hover {
       background-color: rgba(79, 70, 229, 0.1);
     }
-
+    
     .feature-card h3 {
-      color: var(--primary-color);
-      margin-bottom: 10px;
-      font-size: 1.2rem;
+      color: #4f46e5;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
     }
-
+    
+    /* Highlight Box */
+    .highlight {
+      background-color: rgba(79, 70, 229, 0.1);
+      border-left: 4px solid #4f46e5;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    /* Advantages/Disadvantages Grid */
     .advantages-disadvantages {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin: 20px 0;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
     }
-
+    
     @media (max-width: 768px) {
       .advantages-disadvantages {
         grid-template-columns: 1fr;
       }
-      h1 {
-        font-size: 2rem;
-      }
-      .section-title {
-        font-size: 1.3rem;
-      }
     }
-
-    .advantages, .disadvantages {
-      padding: 15px;
-      border-radius: var(--border-radius);
-    }
-
+    
     .advantages {
       background-color: rgba(34, 197, 94, 0.1);
       border-left: 4px solid #22c55e;
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
     }
-
+    
     .disadvantages {
       background-color: rgba(239, 68, 68, 0.1);
       border-left: 4px solid #ef4444;
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
     }
-
-    .tag {
-      display: inline-block;
-      padding: 4px 10px;
-      background: var(--secondary-color);
-      color: white;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      margin-right: 8px;
-      margin-bottom: 8px;
-    }
-
+    
+    /* Examples Box */
     .examples {
       background-color: rgba(59, 130, 246, 0.1);
-      padding: 15px;
-      border-radius: var(--border-radius);
-      margin-top: 15px;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
     }
-
-    .reference {
-      margin-top: 50px;
-      padding: 20px;
-      background: rgba(0,0,0,0.02);
-      border-radius: var(--border-radius);
+    
+    /* Tags */
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: #3b82f6;
+      color: white;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
     }
-
-    .reference h3 {
-      color: var(--primary-color);
-      margin-bottom: 15px;
+    
+    /* Cards */
+    .card {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin: 1rem 0;
+      border: 1px solid #e2e8f0;
     }
-
-    .reference ul {
-      list-style-type: none;
-    }
-
-    .reference ul li {
-      margin-bottom: 10px;
-    }
-
-    .reference ul li a {
-      color: var(--accent-color);
-      text-decoration: none;
-    }
-
-    .reference ul li a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 0;
-      color: var(--text-light);
-      font-size: 0.9rem;
-    }
-
+    
+    /* Back to Top Button */
     .back-to-top {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary-color);
+      bottom: 2rem;
+      right: 2rem;
+      background: #4f46e5;
       color: white;
-      width: 50px;
-      height: 50px;
+      width: 2.5rem;
+      height: 2.5rem;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       opacity: 0;
-      transition: var(--transition);
-      font-size: 1.5rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: opacity 0.3s, background-color 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-size: 1.25rem;
+      z-index: 40;
     }
-
+    
+    .back-to-top:hover {
+      background-color: #4338ca;
+    }
+    
     .back-to-top.visible {
       opacity: 1;
     }
-
-    /* Dark mode toggle */
-    .theme-switch {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+    
+    /* CPU Scheduling Simulator */
+    #simulator {
+      padding: 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 2rem 0;
+    }
+    
+    .steps {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .step {
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border-radius: 9999px;
+      font-weight: 500;
+    }
+    
+    .step.active {
+      background-color: #9b87f5;
+      color: white;
+    }
+    
+    .step:not(.active) {
+      background-color: #f1f0fb;
+      color: #6E59A5;
+    }
+    
+    .step-content {
+      display: none;
+    }
+    
+    .step-content.active {
+      display: block;
+    }
+    
+    /* Form controls */
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    
+    input:focus, select:focus {
+      outline: 2px solid #9b87f5;
+      border-color: #9b87f5;
+    }
+    
+    button {
+      background-color: #9b87f5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
       cursor: pointer;
-      padding: 10px;
-      background: var(--card-bg);
-      border-radius: 50%;
-      box-shadow: var(--shadow);
-      z-index: 10;
+      transition: background-color 0.2s;
     }
-
-    .theme-switch svg {
-      width: 24px;
-      height: 24px;
-      fill: var(--primary-color);
+    
+    button:hover {
+      background-color: #7E69AB;
     }
-
-    /* Dark Mode */
-    .dark-mode {
-      --primary-color: #818cf8;
-      --secondary-color: #6366f1;
-      --accent-color: #60a5fa;
-      --background-color: #0f172a;
-      --card-bg: #1e293b;
-      --text-color: #f8fafc;
-      --text-light: #cbd5e1;
+    
+    button.secondary {
+      background-color: #6c757d;
+    }
+    
+    button.secondary:hover {
+      background-color: #5a6268;
+    }
+    
+    /* Process table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    
+    th, td {
+      padding: 0.75rem;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    
+    th {
+      background-color: #f1f0fb;
+      font-weight: 600;
+      color: #6E59A5;
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 1rem;
+    }
+    
+    .tab {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .tab.active {
+      border-bottom: 2px solid #9b87f5;
+      color: #6E59A5;
+    }
+    
+    /* Gantt chart */
+    .gantt-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      padding: 0.5rem 0;
+    }
+    
+    .gantt {
+      display: flex;
+      min-width: max-content;
+    }
+    
+    .gantt-box {
+      padding: 1rem 0.5rem;
+      min-width: 60px;
+      text-align: center;
+      color: white;
+      font-weight: 500;
+      position: relative;
+      border-right: 1px dashed rgba(255,255,255,0.3);
+    }
+    
+    .time-marker {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      font-size: 0.75rem;
+      color: #666;
+    }
+    
+    .time-marker.end {
+      left: auto;
+      right: 0;
+    }
+    
+    /* Metrics */
+    .metrics {
+      background-color: #f1f0fb;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    
+    .metric-group {
+      display: inline-block;
+      margin: 0 1rem;
+    }
+    
+    .metric-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #6E59A5;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #e5e7eb;
+      color: #374151;
+      margin-top: 3rem;
+    }
+    
+    /* Form grid for two columns */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* List styles */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Additional utility classes */
+    .text-center {
+      text-align: center;
+    }
+    
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+    
+    .mt-4 {
+      margin-top: 1rem;
+    }
+    
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="theme-switch" id="themeSwitch">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-      <path d="M12 22C17.5228 22 22 17.5228 22 12C22 11.5373 21.3065 11.4608 21.0672 11.8568C19.9289 13.7406 17.8615 15 15.5 15C11.9101 15 9 12.0899 9 8.5C9 6.13845 10.2594 4.07105 12.1432 2.93276C12.5392 2.69347 12.4627 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>
-    </svg>
-  </div>
-
-  <div class="container">
-    <header>
-      <h1><span class="gradient-text">Operating Systems</span> and Their Types</h1>
-      <p class="subtitle">An in-depth exploration of various operating systems that power our digital world</p>
-    </header>
-
-    <div class="section active">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">What is an Operating System?</div>
-      <div class="section-content">
-        <p>An operating system (OS) is system software that acts as an intermediary between computer hardware and users. It provides a platform for users and application programs to interact with the hardware. The operating system is responsible for managing hardware resources like CPU, memory, input/output devices, and storage.</p>
-        
-        <p>The OS handles essential functions such as process management, memory management, file systems, device control, and security. It ensures that tasks are executed efficiently, and system resources are allocated properly. Without an operating system, users would need to interact with hardware directly, which would be complex and inefficient.</p>
-        
-        <div class="highlight">
-          <p>An operating system serves as a resource manager, interface provider, and service center for computer hardware and software.</p>
-        </div>
-
-        <h2>Core Functions of Operating Systems</h2>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <h3>Process Management</h3>
-            <p>Creating, scheduling, and terminating processes and threads</p>
-          </div>
-          <div class="feature-card">
-            <h3>Memory Management</h3>
-            <p>Allocating and deallocating memory space as needed</p>
-          </div>
-          <div class="feature-card">
-            <h3>File System Management</h3>
-            <p>Creating, accessing, and maintaining file structures</p>
-          </div>
-          <div class="feature-card">
-            <h3>I/O Management</h3>
-            <p>Controlling input/output devices and communications</p>
-          </div>
-          <div class="feature-card">
-            <h3>Security Management</h3>
-            <p>Protecting system resources and user data</p>
-          </div>
-          <div class="feature-card">
-            <h3>User Interface</h3>
-            <p>Providing GUI or CLI for user interaction</p>
-          </div>
-        </div>
-
-        <p>Operating systems can be found in desktops, laptops, smartphones, embedded devices, and servers. Common examples include Windows, Linux, macOS, Android, and iOS. Each is tailored for specific hardware and user requirements. OS design can vary depending on whether it needs to prioritize speed, security, multitasking, or real-time processing.</p>
-      </div>
-    </div>
-
-    <!-- Types of OS sections follow here -->
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">1. Batch Operating System</div>
-      <div class="section-content">
-        <p>Batch operating systems were the earliest form of OS. Users did not interact directly with the system. Instead, tasks were collected, grouped based on requirements, and processed in batches. These jobs were executed one after the other with minimal idle CPU time.</p>
-        
-        <p>Batch OS uses job control languages (JCL) and is efficient for similar jobs. For example, payroll systems and large-scale data processing benefit from batch processing.</p>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Resource Utilization:</strong> High efficiency in CPU usage</li>
-              <li><strong>Low Idle Time:</strong> Continuous processing of jobs</li>
-              <li><strong>Automation:</strong> No user intervention needed during execution</li>
-              <li><strong>Cost-Effective:</strong> Useful for repetitive tasks</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>No Interaction:</strong> Users cannot interact during execution</li>
-              <li><strong>Turnaround Time:</strong> Long wait times for job completion</li>
-              <li><strong>Debugging:</strong> Difficult to debug batch processes</li>
-              <li><strong>CPU Utilization:</strong> I/O-bound jobs may cause CPU underutilization</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>IBM OS/360, UNIVAC systems, IBM z/OS (modern implementation for mainframes)</p>
-          <div class="tags">
-            <span class="tag">Historical</span>
-            <span class="tag">Mainframes</span>
-            <span class="tag">Data Processing</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">2. Time-Sharing Operating System</div>
-      <div class="section-content">
-        <p>Time-sharing OS allows multiple users to use the system simultaneously. Each user gets a time slice of the CPU, managed by the scheduler. The system switches rapidly between users to give the illusion of direct interaction.</p>
-        
-        <p>It introduced multitasking and allowed better utilization of CPU time. Key characteristics include responsiveness, scheduling algorithms, and terminal access.</p>
-        
-        <div class="highlight">
-          <p>Time-sharing systems brought about the concept of <strong>interactive computing</strong>, where users could directly interact with the computer while it was processing.</p>
-        </div>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Interactive Computing:</strong> Real-time user interaction</li>
-              <li><strong>Fair Resource Allocation:</strong> CPU time is distributed equitably</li>
-              <li><strong>Multiprogramming:</strong> Multiple programs can run concurrently</li>
-              <li><strong>User Experience:</strong> Each user feels they have dedicated access</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Security Challenges:</strong> Multiple users increase security risks</li>
-              <li><strong>Complex Scheduling:</strong> Needs sophisticated scheduling algorithms</li>
-              <li><strong>Resource Intensive:</strong> Requires more memory and system resources</li>
-              <li><strong>Performance Issues:</strong> Can slow down with too many users</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>MULTICS, UNIX, Linux, macOS, Windows (modern operating systems incorporate time-sharing principles)</p>
-          <div class="tags">
-            <span class="tag">Multitasking</span>
-            <span class="tag">Interactive</span>
-            <span class="tag">Multi-user</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">3. Distributed Operating System</div>
-      <div class="section-content">
-        <p>Distributed OS runs on a group of networked computers and manages resources collectively. The system appears as a single machine to users even though computation is shared across devices.</p>
-        
-        <p>It offers load balancing, resource sharing, and fault tolerance. These OS are vital in cloud computing and cluster-based systems.</p>
-        
-        <div class="highlight">
-          <p>Distributed OS provides transparency, making multiple physical machines appear as a single system to users and applications.</p>
-        </div>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Reliability:</strong> Fault tolerance through redundancy</li>
-              <li><strong>Scalability:</strong> Easy to add more nodes as demand increases</li>
-              <li><strong>Resource Sharing:</strong> Efficient utilization of combined resources</li>
-              <li><strong>Performance:</strong> Parallel processing improves speed</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Complexity:</strong> Difficult to design, implement and maintain</li>
-              <li><strong>Network Dependency:</strong> Vulnerable to network issues</li>
-              <li><strong>Security Concerns:</strong> More attack surfaces across nodes</li>
-              <li><strong>Consistency Issues:</strong> Data coherence challenges across nodes</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>Amoeba, Plan 9, Google Borg, Kubernetes, Apache Mesos, Microsoft Azure's underlying system</p>
-          <div class="tags">
-            <span class="tag">Cloud</span>
-            <span class="tag">Clusters</span>
-            <span class="tag">Parallel Computing</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">4. Network Operating System</div>
-      <div class="section-content">
-        <p>Network OS allows computers to communicate and share resources over a network. Unlike distributed OS, each node is independent and managed separately. Users are aware of multiple systems.</p>
-        
-        <p>Network OS supports file sharing, user access management, printers, and communication protocols. It is ideal for office or educational LAN environments.</p>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Centralized Management:</strong> Easier administration of resources</li>
-              <li><strong>Resource Sharing:</strong> Efficient use of hardware like printers</li>
-              <li><strong>Data Sharing:</strong> Files can be accessed across the network</li>
-              <li><strong>User Management:</strong> Centralized authentication and privileges</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Server Dependency:</strong> System relies on server availability</li>
-              <li><strong>Maintenance Cost:</strong> Requires dedicated IT staff</li>
-              <li><strong>Security Risks:</strong> Network vulnerabilities can affect all systems</li>
-              <li><strong>Performance:</strong> Network congestion can slow down operations</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>Windows Server, Novell NetWare, Linux Server distributions (Ubuntu Server, Red Hat Enterprise Linux), Cisco IOS</p>
-          <div class="tags">
-            <span class="tag">Client-Server</span>
-            <span class="tag">Enterprise</span>
-            <span class="tag">Resource Sharing</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">5. Real-Time Operating System</div>
-      <div class="section-content">
-        <p>Real-Time OS is used where strict timing constraints are required. It must guarantee responses within a specific time limit. RTOS is used in embedded systems, robotics, avionics, and medical systems.</p>
-        
-        <div class="highlight">
-          <p>There are two main types of RTOS:</p>
-          <ul>
-            <li><strong>Hard RTOS:</strong> Guarantees task completion by deadlines; failure is critical (e.g., pacemakers, airbag systems)</li>
-            <li><strong>Soft RTOS:</strong> Tolerates occasional missed deadlines (e.g., video streaming, online gaming)</li>
-          </ul>
-        </div>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Determinism:</strong> Predictable response times</li>
-              <li><strong>Reliability:</strong> High system stability for critical applications</li>
-              <li><strong>Priority Handling:</strong> Efficiently manages task priorities</li>
-              <li><strong>Low Latency:</strong> Minimizes response delay</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Limited Features:</strong> Fewer capabilities than general-purpose OS</li>
-              <li><strong>Development Complexity:</strong> More challenging to program for</li>
-              <li><strong>Resource Constraints:</strong> Often runs on limited hardware</li>
-              <li><strong>Cost:</strong> Development and certification can be expensive</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>FreeRTOS, VxWorks, RTLinux, QNX, INTEGRITY RTOS</p>
-          <div class="tags">
-            <span class="tag">Embedded Systems</span>
-            <span class="tag">Deterministic</span>
-            <span class="tag">Mission Critical</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">6. Mobile Operating System</div>
-      <div class="section-content">
-        <p>Mobile OS is designed for smartphones and tablets. It supports wireless communication, touch input, limited memory, and power management. These systems handle app management, security, and sensor integration.</p>
-        
-        <p>Modern mobile operating systems are complex environments that balance performance with energy efficiency and provide rich user experiences through intuitive interfaces.</p>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>User-Friendly Interface:</strong> Intuitive touch-based interaction</li>
-              <li><strong>Energy Efficiency:</strong> Optimized for battery-powered devices</li>
-              <li><strong>App Ecosystem:</strong> Rich marketplace of applications</li>
-              <li><strong>Connectivity:</strong> Seamless integration with wireless networks</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Limited Multitasking:</strong> Restricted compared to desktop OS</li>
-              <li><strong>Security Vulnerabilities:</strong> Susceptible to mobile-specific attacks</li>
-              <li><strong>Hardware Limitations:</strong> Constrained by device capabilities</li>
-              <li><strong>Battery Dependency:</strong> Performance affected by power constraints</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>Android (Google), iOS (Apple), HarmonyOS (Huawei), KaiOS (for feature phones)</p>
-          <div class="tags">
-            <span class="tag">Smartphones</span>
-            <span class="tag">Tablets</span>
-            <span class="tag">Touch Interface</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">7. Embedded Operating System</div>
-      <div class="section-content">
-        <p>Embedded OS runs on devices that perform specific tasks — like washing machines, microwave ovens, routers, or industrial robots. These OS are lightweight and tailored to hardware constraints.</p>
-        
-        <p>They often run one application repeatedly and must be reliable and fast. Embedded OS frequently combines with real-time capabilities for time-sensitive applications.</p>
-        
-        <div class="highlight">
-          <p>With the growth of IoT (Internet of Things), embedded operating systems are becoming increasingly important in connecting everyday objects to networks and the internet.</p>
-        </div>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Low Power Consumption:</strong> Optimized for energy efficiency</li>
-              <li><strong>Fast Boot Time:</strong> Quick startup for immediate operation</li>
-              <li><strong>Reliability:</strong> Stable for continuous operation</li>
-              <li><strong>Task-Specific:</strong> Optimized for their dedicated function</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Limited Functionality:</strong> Designed for specific tasks only</li>
-              <li><strong>Hardware Dependency:</strong> Tightly coupled with specific hardware</li>
-              <li><strong>Update Difficulty:</strong> Often challenging to update or upgrade</li>
-              <li><strong>Development Complexity:</strong> Requires specialized knowledge</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>Embedded Linux, TinyOS, Contiki, RIOT OS, Zephyr, Amazon FreeRTOS</p>
-          <div class="tags">
-            <span class="tag">IoT</span>
-            <span class="tag">Specialized Hardware</span>
-            <span class="tag">Resource Constrained</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">8. Cloud Operating System</div>
-      <div class="section-content">
-        <p>Cloud OS is a relatively new category that manages cloud infrastructure and provides services to users over the internet. It abstracts physical hardware resources and offers them as virtualized services.</p>
-        
-        <p>These operating systems are designed to manage large-scale distributed resources and provide scalable, on-demand computing capabilities. They are the foundation of modern cloud computing infrastructure.</p>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Scalability:</strong> Easily scales resources up or down</li>
-              <li><strong>Accessibility:</strong> Available from anywhere with internet</li>
-              <li><strong>Cost-Effective:</strong> Pay-as-you-go model reduces expenses</li>
-              <li><strong>Resource Pooling:</strong> Efficient sharing of computing resources</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Internet Dependency:</strong> Requires stable connection</li>
-              <li><strong>Security Concerns:</strong> Data vulnerability in shared environments</li>
-              <li><strong>Limited Control:</strong> Less control over underlying hardware</li>
-              <li><strong>Learning Curve:</strong> Requires specialized knowledge</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>OpenStack, CloudStack, VMware vSphere, Microsoft Azure Stack, Google Anthos</p>
-          <div class="tags">
-            <span class="tag">Virtualization</span>
-            <span class="tag">IaaS</span>
-            <span class="tag">Elasticity</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- References Section -->
-    <div class="reference">
-      <h3>References and Further Reading</h3>
+  <header>
+    <div class="logo">OS Concepts</div>
+    <nav>
       <ul>
-        <li><a href="https://www.geeksforgeeks.org/types-of-operating-systems/" target="_blank">GeeksforGeeks - Types of Operating Systems</a></li>
-        <li><a href="https://www.tutorialspoint.com/operating_system/os_types.htm" target="_blank">TutorialsPoint - Operating System Types</a></li>
-        <li><a href="https://www.javatpoint.com/types-of-operating-system" target="_blank">JavaTPoint - Types of Operating System</a></li>
-        <li><a href="https://www.techtarget.com/whatis/definition/operating-system-OS" target="_blank">TechTarget - Operating System Definition</a></li>
-        <li><a href="https://www.ibm.com/topics/operating-systems" target="_blank">IBM - Operating Systems Overview</a></li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#scheduling">Scheduling</a></li>
+        <li><a href="disk.html">File & I/O</a></li>
+        <li><a href="osdetail.html">OS about</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home">
+    <h1><span class="gradient-text">Operating Systems</span> and Their Types</h1>
+    <p class="text-center text-lg mb-4">An in-depth exploration of various operating systems that power our digital world</p>
+    
+    <div class="accordion">
+      <!-- What is an Operating System Section -->
+      <div class="accordion-item active">
+        <div class="accordion-header">What is an Operating System?</div>
+        <div class="accordion-content">
+          <p>
+            An operating system (OS) is system software that acts as an intermediary between computer hardware and users. 
+            It provides a platform for users and application programs to interact with the hardware. The operating system 
+            is responsible for managing hardware resources like CPU, memory, input/output devices, and storage.
+          </p>
+          
+          <p>
+            The OS handles essential functions such as process management, memory management, file systems, device control, 
+            and security. It ensures that tasks are executed efficiently, and system resources are allocated properly. 
+            Without an operating system, users would need to interact with hardware directly, which would be complex and inefficient.
+          </p>
+          
+          <div class="highlight">
+            <p>An operating system serves as a resource manager, interface provider, and service center for computer hardware and software.</p>
+          </div>
+
+          <h2>Core Functions of Operating Systems</h2>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>Process Management</h3>
+              <p>Creating, scheduling, and terminating processes and threads</p>
+            </div>
+            <div class="feature-card">
+              <h3>Memory Management</h3>
+              <p>Allocating and deallocating memory space as needed</p>
+            </div>
+            <div class="feature-card">
+              <h3>File System Management</h3>
+              <p>Creating, accessing, and maintaining file structures</p>
+            </div>
+            <div class="feature-card">
+              <h3>I/O Management</h3>
+              <p>Controlling input/output devices and communications</p>
+            </div>
+            <div class="feature-card">
+              <h3>Security Management</h3>
+              <p>Protecting system resources and user data</p>
+            </div>
+            <div class="feature-card">
+              <h3>User Interface</h3>
+              <p>Providing GUI or CLI for user interaction</p>
+            </div>
+          </div>
+
+          <p>
+            Operating systems can be found in desktops, laptops, smartphones, embedded devices, and servers. 
+            Common examples include Windows, Linux, macOS, Android, and iOS. Each is tailored for specific 
+            hardware and user requirements. OS design can vary depending on whether it needs to prioritize 
+            speed, security, multitasking, or real-time processing.
+          </p>
+        </div>
+      </div>
+
+      <!-- Batch Operating System -->
+      <div class="accordion-item">
+        <div class="accordion-header">1. Batch Operating System</div>
+        <div class="accordion-content">
+          <p>
+            Batch operating systems were the earliest form of OS. Users did not interact directly with the system. 
+            Instead, tasks were collected, grouped based on requirements, and processed in batches. 
+            These jobs were executed one after the other with minimal idle CPU time.
+          </p>
+          
+          <p>
+            Batch OS uses job control languages (JCL) and is efficient for similar jobs. 
+            For example, payroll systems and large-scale data processing benefit from batch processing.
+          </p>
+          
+          <div class="advantages-disadvantages">
+            <div class="advantages">
+              <h3>Advantages:</h3>
+              <ul>
+                <li><strong>Resource Utilization:</strong> High efficiency in CPU usage</li>
+                <li><strong>Low Idle Time:</strong> Continuous processing of jobs</li>
+                <li><strong>Automation:</strong> No user intervention needed during execution</li>
+                <li><strong>Cost-Effective:</strong> Useful for repetitive tasks</li>
+              </ul>
+            </div>
+            
+            <div class="disadvantages">
+              <h3>Disadvantages:</h3>
+              <ul>
+                <li><strong>No Interaction:</strong> Users cannot interact during execution</li>
+                <li><strong>Turnaround Time:</strong> Long wait times for job completion</li>
+                <li><strong>Debugging:</strong> Difficult to debug batch processes</li>
+                <li><strong>CPU Utilization:</strong> I/O-bound jobs may cause CPU underutilization</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="examples">
+            <h3>Examples:</h3>
+            <p>IBM OS/360, UNIVAC systems, IBM z/OS (modern implementation for mainframes)</p>
+            <div>
+              <span class="tag">Historical</span>
+              <span class="tag">Mainframes</span>
+              <span class="tag">Data Processing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Time-Sharing Operating System -->
+      <div class="accordion-item">
+        <div class="accordion-header">2. Time-Sharing Operating System</div>
+        <div class="accordion-content">
+          <p>
+            Time-sharing OS allows multiple users to use the system simultaneously. Each user gets a time slice of the CPU, 
+            managed by the scheduler. The system switches rapidly between users to give the illusion of direct interaction.
+          </p>
+          
+          <p>
+            It introduced multitasking and allowed better utilization of CPU time. Key characteristics include 
+            responsiveness, scheduling algorithms, and terminal access.
+          </p>
+          
+          <div class="highlight">
+            <p>Time-sharing systems brought about the concept of <strong>interactive computing</strong>, 
+            where users could directly interact with the computer while it was processing.</p>
+          </div>
+          
+          <div class="advantages-disadvantages">
+            <div class="advantages">
+              <h3>Advantages:</h3>
+              <ul>
+                <li><strong>Interactive Computing:</strong> Real-time user interaction</li>
+                <li><strong>Fair Resource Allocation:</strong> CPU time is distributed equitably</li>
+                <li><strong>Multiprogramming:</strong> Multiple programs can run concurrently</li>
+                <li><strong>User Experience:</strong> Each user feels they have dedicated access</li>
+              </ul>
+            </div>
+            
+            <div class="disadvantages">
+              <h3>Disadvantages:</h3>
+              <ul>
+                <li><strong>Security Challenges:</strong> Multiple users increase security risks</li>
+                <li><strong>Complex Scheduling:</strong> Needs sophisticated scheduling algorithms</li>
+                <li><strong>Resource Intensive:</strong> Requires more memory and system resources</li>
+                <li><strong>Performance Issues:</strong> Can slow down with too many users</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="examples">
+            <h3>Examples:</h3>
+            <p>MULTICS, UNIX, Linux, macOS, Windows (modern operating systems incorporate time-sharing principles)</p>
+            <div>
+              <span class="tag">Multitasking</span>
+              <span class="tag">Interactive</span>
+              <span class="tag">Multi-user</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="scheduling">
+    <h2>CPU Scheduling</h2>
+    <p>CPU Scheduling is a fundamental concept in operating systems that determines which process runs on the CPU when multiple processes are ready to run. Efficient scheduling maximizes CPU usage and ensures responsiveness for all processes.</p>
+
+    <div class="card">
+      <h3>Types of CPU Scheduling Algorithms</h3>
+      <ul>
+        <li>FCFS (First-Come, First-Served)</li>
+        <li>SJF (Shortest Job First)</li>
+        <li>Priority Scheduling</li>
+        <li>Round Robin (RR)</li>
+        <li>Multilevel Queue Scheduling</li>
+        <li>Multilevel Feedback Queue</li>
       </ul>
     </div>
 
-    
-  </div>
+    <!-- CPU Scheduling Simulator -->
+    <div id="simulator">
+      <h2 class="text-center">CPU Scheduling Simulator</h2>
+      
+      <div class="steps">
+        <div class="step active" data-step="1">1. Select Algorithm</div>
+        <div class="step" data-step="2">2. Add Processes</div>
+        <div class="step" data-step="3">3. View Results</div>
+      </div>
+      
+      <div class="step-content active" id="step1">
+        <div class="card">
+          <h3 class="text-center">Select Scheduling Algorithm</h3>
+          <div class="form-group">
+            <label for="algorithm">Choose Algorithm:</label>
+            <select id="algorithm">
+              <option value="">-- Select Algorithm --</option>
+              <option value="FCFS">First Come First Served (FCFS)</option>
+              <option value="SJF">Shortest Job First (Non-Preemptive)</option>
+              <option value="SRTF">Shortest Remaining Time First (Preemptive)</option>
+              <option value="PRIORITY">Priority Scheduling (Non-Preemptive)</option>
+              <option value="RR">Round Robin</option>
+            </select>
+          </div>
+          
+          <div class="form-group" id="time-quantum-container" style="display:none;">
+            <label for="time-quantum">Time Quantum:</label>
+            <input type="number" id="time-quantum" min="1" value="2" />
+          </div>
+          
+          <button id="select-algorithm-btn">Continue to Add Processes</button>
+        </div>
+      </div>
+      
+      <div class="step-content" id="step2">
+        <div class="card">
+          <h3 class="text-center">Add Processes for <span id="selected-algorithm">Algorithm</span></h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="pid">Process ID:</label>
+              <input type="text" id="pid" placeholder="e.g. P1" />
+            </div>
+            
+            <div class="form-group">
+              <label for="burst-time">Burst Time:</label>
+              <input type="number" id="burst-time" min="1" placeholder="e.g. 5" />
+            </div>
+            
+            <div class="form-group">
+              <label for="arrival-time">Arrival Time:</label>
+              <input type="number" id="arrival-time" min="0" placeholder="e.g. 0" />
+            </div>
+            
+            <div class="form-group" id="priority-container" style="display:none;">
+              <label for="priority">Priority (Lower is Higher):</label>
+              <input type="number" id="priority" min="1" placeholder="e.g. 2" />
+            </div>
+          </div>
+          
+          <div>
+            <button id="add-process-btn">Add Process</button>
+            <button id="go-back-btn" class="secondary">Back to Algorithm Selection</button>
+          </div>
+        </div>
+        
+        <div class="card" id="process-list-container" style="display:none;">
+          <h3 class="text-center">Process List</h3>
+          <div style="overflow-x:auto;">
+            <table id="process-table">
+              <thead>
+                <tr>
+                  <th>Process ID</th>
+                  <th>Arrival Time</th>
+                  <th>Burst Time</th>
+                  <th id="priority-header" style="display:none;">Priority</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="process-table-body">
+                <!-- Process entries will be populated here -->
+              </tbody>
+            </table>
+          </div>
+          
+          <button id="run-algorithm-btn" class="mt-4">Run Algorithm</button>
+        </div>
+      </div>
+      
+      <div class="step-content" id="step3">
+        <div class="card">
+          <h3 class="text-center">Results for <span id="result-algorithm">Algorithm</span></h3>
+          
+          <div class="tabs">
+            <div class="tab active" data-tab="gantt">Gantt Chart</div>
+            <div class="tab" data-tab="table">Process Details</div>
+          </div>
+          
+          <div id="gantt-tab" class="tab-content">
+            <div class="gantt-container">
+              <div class="gantt" id="gantt-chart">
+                <!-- Gantt chart will be populated here -->
+              </div>
+            </div>
+          </div>
+          
+          <div id="table-tab" class="tab-content" style="display:none;">
+            <div style="overflow-x:auto;">
+              <table id="results-table">
+                <thead>
+                  <tr>
+                    <th>Process ID</th>
+                    <th>Arrival Time</th>
+                    <th>Burst Time</th>
+                    <th id="result-priority-header" style="display:none;">Priority</th>
+                    <th>Start Time</th>
+                    <th>Completion Time</th>
+                    <th>Turnaround Time</th>
+                    <th>Waiting Time</th>
+                  </tr>
+                </thead>
+                <tbody id="results-body">
+                  <!-- Results will be populated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="metrics">
+            <div class="metric-group">
+              <div>Average Turnaround Time</div>
+              <div class="metric-value" id="avg-turnaround">0.00</div>
+            </div>
+            <div class="metric-group">
+              <div>Average Waiting Time</div>
+              <div class="metric-value" id="avg-waiting">0.00</div>
+            </div>
+          </div>
+          
+          <button id="start-over-btn" class="mt-4">Start Over</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Back to top button -->
-  <div class="back-to-top" id="backToTop">↑</div>
+  <section id="fileio">
+    <h2>File and I/O Management</h2>
+    <p>This section covers disk scheduling algorithms like FCFS, SSTF, SCAN, and C-SCAN with interactive visual tools.</p>
+
+  </section>
+
+ 
+
+  <div id="backToTop" class="back-to-top">↑</div>
+
+  
 
   <script>
-    // Toggle section expansion
-    function toggleSection(element) {
-      element.classList.toggle("active");
-      
-      // Add animation effect
-      const content = element.querySelector('.section-content');
-      if (element.classList.contains('active')) {
-        content.style.maxHeight = content.scrollHeight + "px";
-      } else {
-        content.style.maxHeight = "0";
-      }
-    }
+    // Global variables
+    let currentStep = 1;
+    let selectedAlgorithm = '';
+    let processes = [];
+    let showPriorityInputs = false;
+    let showProcessList = false;
     
-    // Make all sections expandable initially
-    document.addEventListener('DOMContentLoaded', function() {
-      // Expand the first section by default
-      const firstSection = document.querySelector('.section');
-      if (firstSection) {
-        firstSection.classList.add('active');
-        const content = firstSection.querySelector('.section-content');
-        content.style.maxHeight = content.scrollHeight + "px";
-      }
-      
-      // Back to top button
-      const backToTopButton = document.getElementById('backToTop');
-      
-      window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-          backToTopButton.classList.add('visible');
-        } else {
-          backToTopButton.classList.remove('visible');
-        }
-      });
-      
-      backToTopButton.addEventListener('click', function() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-      
-      // Dark mode toggle
-      const themeSwitch = document.getElementById('themeSwitch');
-      
-      themeSwitch.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-        localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));
-      });
-      
-      // Check for saved theme preference
-      if (localStorage.getItem('dark-mode') === 'true') {
-        document.body.classList.add('dark-mode');
+    const colors = [
+      '#6E59A5', '#9b87f5', '#7E69AB', '#D946EF', '#8B5CF6', 
+      '#F97316', '#0EA5E9', '#1EAEDB', '#33C3F0', '#0FA0CE'
+    ];
+    
+    // DOM Elements
+    const algorithmSelect = document.getElementById('algorithm');
+    const timeQuantumContainer = document.getElementById('time-quantum-container');
+    const timeQuantumInput = document.getElementById('time-quantum');
+    const priorityContainer = document.getElementById('priority-container');
+    const priorityHeader = document.getElementById('priority-header');
+    const resultPriorityHeader = document.getElementById('result-priority-header');
+    const selectedAlgorithmSpan = document.getElementById('selected-algorithm');
+    const resultAlgorithmSpan = document.getElementById('result-algorithm');
+    const processListContainer = document.getElementById('process-list-container');
+    const processTableBody = document.getElementById('process-table-body');
+    const ganttChart = document.getElementById('gantt-chart');
+    const resultsBody = document.getElementById('results-body');
+    const avgTurnaround = document.getElementById('avg-turnaround');
+    const avgWaiting = document.getElementById('avg-waiting');
+    
+    // DOM Elements for Steps
+    const stepElements = document.querySelectorAll('.step');
+    const stepContents = document.querySelectorAll('.step-content');
+
+    // DOM Elements for back to top button
+    const backToTop = document.getElementById('backToTop');
+
+    // Event Listeners
+    document.getElementById('select-algorithm-btn').addEventListener('click', selectAlgorithm);
+    document.getElementById('add-process-btn').addEventListener('click', addProcess);
+    document.getElementById('go-back-btn').addEventListener('click', goBackToAlgorithm);
+    document.getElementById('run-algorithm-btn').addEventListener('click', runScheduling);
+    document.getElementById('start-over-btn').addEventListener('click', startOver);
+    
+    algorithmSelect.addEventListener('change', function() {
+      const algorithm = this.value;
+      timeQuantumContainer.style.display = algorithm === 'RR' ? 'block' : 'none';
+      showPriorityInputs = algorithm === 'PRIORITY';
+      priorityContainer.style.display = showPriorityInputs ? 'block' : 'none';
+      priorityHeader.style.display = showPriorityInputs ? 'table-cell' : 'none';
+      resultPriorityHeader.style.display = showPriorityInputs ? 'table-cell' : 'none';
+    });
+
+    // Back to top button
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
       }
     });
+    
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        const tabName = this.getAttribute('data-tab');
+        
+        // Update active tab
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Show correct content
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.style.display = 'none';
+        });
+        document.getElementById(`${tabName}-tab`).style.display = 'block';
+      });
+    });
+
+    // Accordion functionality
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', function() {
+        const item = this.parentElement;
+        const isActive = item.classList.contains('active');
+        
+        // Close all accordion items
+        document.querySelectorAll('.accordion-item').forEach(accordionItem => {
+          accordionItem.classList.remove('active');
+          const content = accordionItem.querySelector('.accordion-content');
+          content.style.maxHeight = '0';
+        });
+        
+        // If the clicked item wasn't active, open it
+        if (!isActive) {
+          item.classList.add('active');
+          const content = item.querySelector('.accordion-content');
+          content.style.maxHeight = content.scrollHeight + 'px';
+        }
+      });
+    });
+    
+    // Initialize first accordion item
+    document.querySelector('.accordion-item').classList.add('active');
+    const firstContent = document.querySelector('.accordion-item .accordion-content');
+    firstContent.style.maxHeight = firstContent.scrollHeight + 'px';
+
+    function selectAlgorithm() {
+      selectedAlgorithm = algorithmSelect.value;
+      
+      if (!selectedAlgorithm) {
+        alert('Please select an algorithm first.');
+        return;
+      }
+      
+      // Update UI for algorithm selection
+      selectedAlgorithmSpan.textContent = algorithmSelect.options[algorithmSelect.selectedIndex].text;
+      resultAlgorithmSpan.textContent = algorithmSelect.options[algorithmSelect.selectedIndex].text;
+      
+      // Reset processes for new algorithm
+      processes = [];
+      updateProcessTable();
+      
+      // Move to step 2
+      goToStep(2);
+    }
+
+    function goToStep(step) {
+      // Update step indicators
+      stepElements.forEach(el => {
+        el.classList.remove('active');
+      });
+      stepElements[step-1].classList.add('active');
+      
+      // Show selected step content
+      stepContents.forEach(content => {
+        content.classList.remove('active');
+      });
+      stepContents[step-1].classList.add('active');
+      
+      currentStep = step;
+    }
+
+    function goBackToAlgorithm() {
+      goToStep(1);
+    }
+
+    function addProcess() {
+      const pid = document.getElementById('pid').value.trim();
+      const burstTime = parseInt(document.getElementById('burst-time').value);
+      const arrivalTime = parseInt(document.getElementById('arrival-time').value);
+      const priority = parseInt(document.getElementById('priority').value) || 1;
+
+      // Validate inputs
+      if (!pid || isNaN(burstTime) || burstTime <= 0 || isNaN(arrivalTime) || arrivalTime < 0) {
+        alert('Please enter valid values for all fields.');
+        return;
+      }
+
+      // Check for duplicate process ID
+      if (processes.some(p => p.pid === pid)) {
+        alert('A process with this ID already exists. Please use a unique ID.');
+        return;
+      }
+
+      // Add new process
+      processes.push({ pid, bt: burstTime, at: arrivalTime, prio: priority });
+      
+      // Reset input fields
+      document.getElementById('pid').value = '';
+      document.getElementById('burst-time').value = '';
+      document.getElementById('arrival-time').value = '';
+      document.getElementById('priority').value = '';
+      
+      // Update process table
+      updateProcessTable();
+      showProcessList = processes.length > 0;
+      processListContainer.style.display = showProcessList ? 'block' : 'none';
+    }
+
+    function updateProcessTable() {
+      // Clear table body
+      processTableBody.innerHTML = '';
+      
+      // Add each process to the table
+      processes.forEach((process, index) => {
+        const row = document.createElement('tr');
+        
+        let cells = `
+          <td>${process.pid}</td>
+          <td>${process.at}</td>
+          <td>${process.bt}</td>
+        `;
+        
+        if (showPriorityInputs) {
+          cells += `<td>${process.prio}</td>`;
+        }
+        
+        cells += `<td><button onclick="deleteProcess(${index})" style="background-color:#ea384c; padding:4px 8px; font-size:0.875rem;">Delete</button></td>`;
+        
+        row.innerHTML = cells;
+        processTableBody.appendChild(row);
+      });
+    }
+
+    // This function needs to be global for the onclick handler
+    function deleteProcess(index) {
+      processes.splice(index, 1);
+      updateProcessTable();
+      showProcessList = processes.length > 0;
+      processListContainer.style.display = showProcessList ? 'block' : 'none';
+    }
+
+    function startOver() {
+      // Reset everything
+      processes = [];
+      selectedAlgorithm = '';
+      algorithmSelect.value = '';
+      timeQuantumInput.value = '2';
+      timeQuantumContainer.style.display = 'none';
+      updateProcessTable();
+      showProcessList = false;
+      processListContainer.style.display = 'none';
+      
+      // Go back to step 1
+      goToStep(1);
+    }
+
+    function runScheduling() {
+      if (processes.length === 0) {
+        alert('Please add at least one process first.');
+        return;
+      }
+      
+      let results;
+      
+      switch (selectedAlgorithm) {
+        case 'FCFS':
+          results = calculateFCFS();
+          break;
+        case 'SJF':
+          results = calculateSJF();
+          break;
+        case 'SRTF':
+          results = calculateSRTF();
+          break;
+        case 'PRIORITY':
+          results = calculatePriority();
+          break;
+        case 'RR':
+          const timeQuantum = parseInt(timeQuantumInput.value);
+          if (isNaN(timeQuantum) || timeQuantum <= 0) {
+            alert('Please enter a valid time quantum.');
+            return;
+          }
+          results = calculateRoundRobin(timeQuantum);
+          break;
+        default:
+          alert('Please select an algorithm.');
+          return;
+      }
+      
+      displayResults(results);
+      goToStep(3);
+    }
+
+    function calculateFCFS() {
+      // Create deep copy of processes and sort by arrival time
+      const sortedProcesses = JSON.parse(JSON.stringify(processes))
+        .sort((a, b) => a.at - b.at);
+      
+      let currentTime = 0;
+      const ganttData = [];
+      
+      // Calculate times for each process
+      sortedProcesses.forEach(process => {
+        // If process hasn't arrived yet, advance time
+        if (currentTime < process.at) {
+          currentTime = process.at;
+        }
+        
+        // Set start time
+        process.start = currentTime;
+        
+        // Add to Gantt chart
+        ganttData.push({
+          pid: process.pid,
+          start: currentTime,
+          end: currentTime + process.bt,
+          color: getProcessColor(process.pid)
+        });
+        
+        // Update current time
+        currentTime += process.bt;
+        
+        // Set completion time
+        process.end = currentTime;
+        
+        // Calculate turnaround and waiting times
+        process.tat = process.end - process.at;
+        process.wt = process.tat - process.bt;
+      });
+      
+      // Calculate averages
+      const avgTAT = sortedProcesses.reduce((sum, p) => sum + p.tat, 0) / sortedProcesses.length;
+      const avgWT = sortedProcesses.reduce((sum, p) => sum + p.wt, 0) / sortedProcesses.length;
+      
+      return {
+        processes: sortedProcesses,
+        ganttData,
+        avgTAT,
+        avgWT
+      };
+    }
+
+    function calculateSJF() {
+      // Create deep copy of processes
+      const processData = JSON.parse(JSON.stringify(processes));
+      
+      let currentTime = 0;
+      let completed = 0;
+      const ganttData = [];
+      
+      // Continue until all processes are completed
+      while (completed < processData.length) {
+        // Find eligible processes (those that have arrived)
+        let eligible = processData.filter(p => p.at <= currentTime && !p.completed);
+        
+        if (eligible.length === 0) {
+          // If no processes are eligible, advance time to next arrival
+          const nextArrival = Math.min(...processData
+            .filter(p => !p.completed)
+            .map(p => p.at));
+          currentTime = nextArrival;
+          continue;
+        }
+        
+        // Find shortest job among eligible processes
+        let shortestJob = eligible.reduce(
+          (min, p) => p.bt < min.bt ? p : min, 
+          eligible[0]
+        );
+        
+        // Mark start time
+        shortestJob.start = currentTime;
+        
+        // Add to Gantt chart
+        ganttData.push({
+          pid: shortestJob.pid,
+          start: currentTime,
+          end: currentTime + shortestJob.bt,
+          color: getProcessColor(shortestJob.pid)
+        });
+        
+        // Update current time
+        currentTime += shortestJob.bt;
+        
+        // Mark completion
+        shortestJob.completed = true;
+        shortestJob.end = currentTime;
+        shortestJob.tat = shortestJob.end - shortestJob.at;
+        shortestJob.wt = shortestJob.tat - shortestJob.bt;
+        completed++;
+      }
+      
+      // Remove temporary 'completed' property
+      processData.forEach(p => delete p.completed);
+      
+      // Calculate averages
+      const avgTAT = processData.reduce((sum, p) => sum + p.tat, 0) / processData.length;
+      const avgWT = processData.reduce((sum, p) => sum + p.wt, 0) / processData.length;
+      
+      return {
+        processes: processData,
+        ganttData,
+        avgTAT,
+        avgWT
+      };
+    }
+
+    function calculateSRTF() {
+      // Create deep copy of processes
+      const processData = JSON.parse(JSON.stringify(processes));
+      
+      // Initialize remaining time for each process
+      processData.forEach(p => {
+        p.remaining = p.bt;
+        p.executed = false;
+      });
+      
+      let currentTime = 0;
+      let completed = 0;
+      const ganttData = [];
+      let previousProcess = null;
+      let startTime = 0;
+      
+      // Continue until all processes are completed
+      while (completed < processData.length) {
+        // Find eligible processes (those that have arrived)
+        let eligible = processData.filter(p => p.at <= currentTime && p.remaining > 0);
+        
+        if (eligible.length === 0) {
+          // If no processes are eligible, advance time to next arrival
+          const nextArrival = Math.min(...processData
+            .filter(p => p.remaining > 0)
+            .map(p => p.at));
+          currentTime = nextArrival;
+          continue;
+        }
+        
+        // Find process with shortest remaining time
+        let shortestJob = eligible.reduce(
+          (min, p) => p.remaining < min.remaining ? p : min, 
+          eligible[0]
+        );
+        
+        // If this is the first time this process executes, mark its start time
+        if (!shortestJob.executed) {
+          shortestJob.start = currentTime;
+          shortestJob.executed = true;
+        }
+        
+        // If process changes, add previous process execution to Gantt chart
+        if (previousProcess !== null && previousProcess !== shortestJob.pid) {
+          ganttData.push({
+            pid: previousProcess,
+            start: startTime,
+            end: currentTime,
+            color: getProcessColor(previousProcess)
+          });
+          
+          startTime = currentTime;
+        } else if (previousProcess === null) {
+          startTime = currentTime;
+        }
+        
+        // Update previous process
+        previousProcess = shortestJob.pid;
+        
+        // Execute for 1 time unit
+        shortestJob.remaining--;
+        currentTime++;
+        
+        // Check if process completed
+        if (shortestJob.remaining === 0) {
+          // Mark completion
+          shortestJob.end = currentTime;
+          shortestJob.tat = shortestJob.end - shortestJob.at;
+          shortestJob.wt = shortestJob.tat - shortestJob.bt;
+          completed++;
+          
+          // Add to Gantt chart
+          ganttData.push({
+            pid: shortestJob.pid,
+            start: startTime,
+            end: currentTime,
+            color: getProcessColor(shortestJob.pid)
+          });
+          
+          previousProcess = null;
+          startTime = currentTime;
+        }
+      }
+      
+      // Remove temporary properties
+      processData.forEach(p => {
+        delete p.remaining;
+        delete p.executed;
+      });
+      
+      // Calculate averages
+      const avgTAT = processData.reduce((sum, p) => sum + p.tat, 0) / processData.length;
+      const avgWT = processData.reduce((sum, p) => sum + p.wt, 0) / processData.length;
+      
+      return {
+        processes: processData,
+        ganttData,
+        avgTAT,
+        avgWT
+      };
+    }
+
+    function calculatePriority() {
+      // Create deep copy of processes
+      const processData = JSON.parse(JSON.stringify(processes));
+      
+      let currentTime = 0;
+      let completed = 0;
+      const ganttData = [];
+      
+      // Continue until all processes are completed
+      while (completed < processData.length) {
+        // Find eligible processes (those that have arrived)
+        let eligible = processData.filter(p => p.at <= currentTime && !p.completed);
+        
+        if (eligible.length === 0) {
+          // If no processes are eligible, advance time to next arrival
+          const nextArrival = Math.min(...processData
+            .filter(p => !p.completed)
+            .map(p => p.at));
+          currentTime = nextArrival;
+          continue;
+        }
+        
+        // Find process with highest priority (lower number = higher priority)
+        let highestPriority = eligible.reduce(
+          (min, p) => p.prio < min.prio ? p : min, 
+          eligible[0]
+        );
+        
+        // Mark start time
+        highestPriority.start = currentTime;
+        
+        // Add to Gantt chart
+        ganttData.push({
+          pid: highestPriority.pid,
+          start: currentTime,
+          end: currentTime + highestPriority.bt,
+          color: getProcessColor(highestPriority.pid)
+        });
+        
+        // Update current time
+        currentTime += highestPriority.bt;
+        
+        // Mark completion
+        highestPriority.completed = true;
+        highestPriority.end = currentTime;
+        highestPriority.tat = highestPriority.end - highestPriority.at;
+        highestPriority.wt = highestPriority.tat - highestPriority.bt;
+        completed++;
+      }
+      
+      // Remove temporary 'completed' property
+      processData.forEach(p => delete p.completed);
+      
+      // Calculate averages
+      const avgTAT = processData.reduce((sum, p) => sum + p.tat, 0) / processData.length;
+      const avgWT = processData.reduce((sum, p) => sum + p.wt, 0) / processData.length;
+      
+      return {
+        processes: processData,
+        ganttData,
+        avgTAT,
+        avgWT
+      };
+    }
+
+    function calculateRoundRobin(timeQuantum) {
+      // Create deep copy of processes
+      const processData = JSON.parse(JSON.stringify(processes));
+      
+      // Initialize remaining time for each process
+      processData.forEach(p => {
+        p.remaining = p.bt;
+        p.executed = false;
+        p.inQueue = false;
+      });
+      
+      let currentTime = 0;
+      let completed = 0;
+      const ganttData = [];
+      const readyQueue = [];
+      
+      // Continue until all processes are completed
+      while (completed < processData.length || readyQueue.length > 0) {
+        // Add newly arrived processes to ready queue
+        processData.forEach(p => {
+          if (p.at <= currentTime && !p.inQueue && p.remaining > 0) {
+            readyQueue.push(p);
+            p.inQueue = true;
+          }
+        });
+        
+        if (readyQueue.length === 0) {
+          // If no processes in ready queue, advance time to next arrival
+          const remainingProcesses = processData.filter(p => p.remaining > 0 && !p.inQueue);
+          if (remainingProcesses.length > 0) {
+            const nextArrival = Math.min(...remainingProcesses.map(p => p.at));
+            currentTime = nextArrival;
+            continue;
+          } else {
+            // All processes have completed
+            break;
+          }
+        }
+        
+        // Get next process from ready queue
+        const currentProcess = readyQueue.shift();
+        
+        // If this is the first time this process executes, mark its start time
+        if (!currentProcess.executed) {
+          currentProcess.start = currentTime;
+          currentProcess.executed = true;
+        }
+        
+        // Calculate execution time (either time quantum or remaining time, whichever is smaller)
+        const executeTime = Math.min(timeQuantum, currentProcess.remaining);
+        
+        // Add to Gantt chart
+        ganttData.push({
+          pid: currentProcess.pid,
+          start: currentTime,
+          end: currentTime + executeTime,
+          color: getProcessColor(currentProcess.pid)
+        });
+        
+        // Update current time and remaining time
+        currentTime += executeTime;
+        currentProcess.remaining -= executeTime;
+        
+        // Add newly arrived processes to ready queue
+        processData.forEach(p => {
+          if (p.at <= currentTime && !p.inQueue && p.remaining > 0) {
+            readyQueue.push(p);
+            p.inQueue = true;
+          }
+        });
+        
+        // Check if process completed
+        if (currentProcess.remaining === 0) {
+          // Mark completion
+          currentProcess.end = currentTime;
+          currentProcess.tat = currentProcess.end - currentProcess.at;
+          currentProcess.wt = currentProcess.tat - currentProcess.bt;
+          completed++;
+        } else {
+          // Put back in ready queue
+          readyQueue.push(currentProcess);
+        }
+      }
+      
+      // Remove temporary properties
+      processData.forEach(p => {
+        delete p.remaining;
+        delete p.executed;
+        delete p.inQueue;
+      });
+      
+      // Calculate averages
+      const avgTAT = processData.reduce((sum, p) => sum + p.tat, 0) / processData.length;
+      const avgWT = processData.reduce((sum, p) => sum + p.wt, 0) / processData.length;
+      
+      return {
+        processes: processData,
+        ganttData,
+        avgTAT,
+        avgWT
+      };
+    }
+
+    function displayResults(results) {
+      // Clear previous results
+      ganttChart.innerHTML = '';
+      resultsBody.innerHTML = '';
+      
+      // Display Gantt chart
+      results.ganttData.forEach((item, index) => {
+        const width = (item.end - item.start) * 40; // 40px per time unit
+        
+        const ganttBox = document.createElement('div');
+        ganttBox.className = 'gantt-box';
+        ganttBox.style.backgroundColor = item.color;
+        ganttBox.style.width = `${width}px`;
+        ganttBox.textContent = item.pid;
+        
+        // Add start time marker
+        const startMarker = document.createElement('div');
+        startMarker.className = 'time-marker';
+        startMarker.textContent = item.start;
+        ganttBox.appendChild(startMarker);
+        
+        // Add end time marker (only for the last item)
+        if (index === results.ganttData.length - 1) {
+          const endMarker = document.createElement('div');
+          endMarker.className = 'time-marker end';
+          endMarker.textContent = item.end;
+          ganttBox.appendChild(endMarker);
+        }
+        
+        ganttChart.appendChild(ganttBox);
+      });
+      
+      // Display process details
+      results.processes.forEach(process => {
+        const row = document.createElement('tr');
+        
+        let cells = `
+          <td>${process.pid}</td>
+          <td>${process.at}</td>
+          <td>${process.bt}</td>
+        `;
+        
+        if (showPriorityInputs) {
+          cells += `<td>${process.prio}</td>`;
+        }
+        
+        cells += `
+          <td>${process.start}</td>
+          <td>${process.end}</td>
+          <td>${process.tat}</td>
+          <td>${process.wt}</td>
+        `;
+        
+        row.innerHTML = cells;
+        resultsBody.appendChild(row);
+      });
+      
+      // Display average metrics
+      avgTurnaround.textContent = results.avgTAT.toFixed(2);
+      avgWaiting.textContent = results.avgWT.toFixed(2);
+      
+      // Set first tab as active
+      document.querySelector('.tab').click();
+    }
+
+    function getProcessColor(pid) {
+      // Generate a consistent color based on process ID
+      const index = Array.from(pid).reduce((sum, char) => sum + char.charCodeAt(0), 0) % colors.length;
+      return colors[index];
+    }
+    // JavaScript for the feedback form functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const feedbackForm = document.getElementById('feedbackForm');
+  const submitBtn = document.getElementById('submitBtn');
+  
+  if (feedbackForm) {
+    feedbackForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Disable button to prevent multiple submissions
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      
+      // Get form values
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const feedback = document.getElementById('feedback').value;
+      
+      // Simulate form submission with a timeout
+      setTimeout(() => {
+        // In a real application, you would send this data to a server
+        console.log('Feedback submitted:', { name, email, feedback });
+        
+        // Show success message
+        alert('Thank you for your feedback!');
+        
+        // Reset form
+        feedbackForm.reset();
+        
+        // Re-enable button
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Feedback';
+      }, 1000);
+    });
+  }
+});
+// JavaScript for Team Information Section with animation
+document.addEventListener('DOMContentLoaded', function() {
+  // Fade in team members when they come into view
+  const teamMembers = document.querySelectorAll('.team-member');
+  
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    teamMembers.forEach(member => {
+      member.style.opacity = '0';
+      member.style.transition = 'opacity 0.6s ease-in-out';
+      observer.observe(member);
+    });
+  }
+  
+  // Animate stat numbers counting up
+  const statNumbers = document.querySelectorAll('.stat-number');
+  
+  if ('IntersectionObserver' in window) {
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const finalValue = parseInt(target.textContent);
+          let startValue = 0;
+          const duration = 1500;
+          const step = Math.ceil(finalValue / (duration / 20));
+          
+          function updateValue() {
+            startValue += step;
+            if (startValue > finalValue) {
+              target.textContent = finalValue + (target.textContent.includes('+') ? '+' : '');
+            } else {
+              target.textContent = startValue + (target.textContent.includes('+') ? '+' : '');
+              setTimeout(updateValue, 20);
+            }
+          }
+          
+          updateValue();
+          statsObserver.unobserve(target);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    statNumbers.forEach(stat => {
+      statsObserver.observe(stat);
+    });
+  }
+});
+
   </script>
+  <!-- Footer section with just the feedback form -->
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Feedback Form -->
+    <div class="feedback-form">
+      <h3>Share Your Feedback</h3>
+      <form id="feedbackForm">
+        <div class="form-row double">
+          <div>
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-input" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-input" placeholder="Your email" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="feedback" class="form-label">Your Feedback</label>
+          <textarea id="feedback" class="form-textarea" placeholder="Share your thoughts about this resource..." required></textarea>
+        </div>
+        <div class="form-row">
+          <button type="submit" class="submit-btn" id="submitBtn">Submit Feedback</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Team Information Section for Footer -->
+<div class="team-info">
+  <h3>Creator</h3>
+  <div class="team-members">
+    <div class="team-member">
+      <div class="member-avatar">
+        <img src="abc.jpg" alt="Team Member">
+      </div>
+      <h4>Vaibhav K. Gawande</h4>
+      <p class="member-role">Project Idea</p>
+      <p class="member-bio">CSE 2nd Year </p>
+    </div>
+    
+  
+    
+  
+  <div class="team-stats">
+    <div class="stat">
+      <span class="stat-number">5+</span>
+      <span class="stat-label">learning Student</span>
+    </div>
+   
+  </div>
+</div>
+
+</footer>
+
 </body>
 </html>
