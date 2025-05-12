@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory & File I/O Management</title>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Memory &amp; File I/O Management
+  </title>
   <style>
-    :root {
+   :root {
       --primary: #0ea5e9;
       --secondary: #10b981;
       --background: #f8fafc;
@@ -326,147 +328,1222 @@
       font-size: 1.5rem;
       cursor: pointer;
     }
+   .floating-logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(45deg, #facc15, #f472b6, #60a5fa, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: float-shine 4s infinite ease-in-out;
+}
+
+@keyframes float-shine {
+  0% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+  50% { transform: translateY(-3px); text-shadow: 0 0 20px rgba(255,255,255,0.9); }
+  100% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+}
+   /* Responsive Enhancements */
+@media (max-width: 768px) {
+  header, .container, nav, .form-grid, .grid, .steps-container, .advantages-disadvantages {
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .logo {
+    font-size: 1.25rem !important;
+    text-align: center;
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  input, select, button {
+    font-size: 1rem;
+    padding: 0.75rem !important;
+  }
+
+  table, th, td {
+    font-size: 0.9rem;
+  }
+
+  .gantt-box {
+    min-width: 40px !important;
+    font-size: 0.75rem;
+  }
+
+  .step {
+    margin-bottom: 0.5rem;
+  }
+
+  h1, h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .tab-buttons {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tab-button {
+    flex: 1 1 auto;
+    min-width: 100px;
+  }
+}
+   /* Synced navbar styles from index */
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    /* CSS for just the feedback form in the footer */
+.footer {
+  background-color: #f1f5f9;
+  padding: 3rem 2rem 1.5rem;
+  margin-top: 3rem;
+}
+/* CSS for Team Information Section */
+.team-info {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.team-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #334155;
+  text-align: center;
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.team-member {
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 0.8rem;
+  border: 3px solid #e5deff;
+}
+
+.member-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-member h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.member-role {
+  color: #7E69AB;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0.3rem 0;
+}
+
+.member-bio {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+.team-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.stat {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #9b87f5;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 640px) {
+  .team-members {
+    grid-template-columns: 1fr;
+  }
   
+  .team-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feedback-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.form-row.double {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .form-row.double {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.submit-btn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #4338ca;
+}
+
+.submit-btn:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+}
+
+    body {
+      background-color: #f7f7f9;
+      color: #1A1F2C;
+      line-height: 1.6;
+    }
+    
+    /* Header */
+    header {
+      background-color: #1e40af;
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+      color: #93c5fd;
+    }
+    
+    /* Main Content */
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #4f46e5, #3b82f6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    
+    h2 {
+      color: #1e40af;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    /* Accordion Styles */
+    .accordion {
+      margin: 2rem 0;
+    }
+    
+    .accordion-item {
+      background: #ffffff;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    
+    .accordion-header {
+      padding: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #4f46e5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+      padding: 0 1rem;
+    }
+    
+    .accordion-item.active .accordion-content {
+      max-height: 1500px;
+      padding: 0 1rem 1rem;
+    }
+    
+    .accordion-header::after {
+      content: "⌄";
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+    
+    .accordion-item.active .accordion-header::after {
+      transform: rotate(180deg);
+    }
+    
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    .feature-card {
+      background-color: rgba(79, 70, 229, 0.05);
+      padding: 1.25rem;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    
+    .feature-card:hover {
+      background-color: rgba(79, 70, 229, 0.1);
+    }
+    
+    .feature-card h3 {
+      color: #4f46e5;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    /* Highlight Box */
+    .highlight {
+      background-color: rgba(79, 70, 229, 0.1);
+      border-left: 4px solid #4f46e5;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    /* Advantages/Disadvantages Grid */
+    .advantages-disadvantages {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    
+    @media (max-width: 768px) {
+      .advantages-disadvantages {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .advantages {
+      background-color: rgba(34, 197, 94, 0.1);
+      border-left: 4px solid #22c55e;
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .disadvantages {
+      background-color: rgba(239, 68, 68, 0.1);
+      border-left: 4px solid #ef4444;
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    /* Examples Box */
+    .examples {
+      background-color: rgba(59, 130, 246, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    
+    /* Tags */
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: #3b82f6;
+      color: white;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    /* Cards */
+    .card {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin: 1rem 0;
+      border: 1px solid #e2e8f0;
+    }
+    
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #4f46e5;
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s, background-color 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-size: 1.25rem;
+      z-index: 40;
+    }
+    
+    .back-to-top:hover {
+      background-color: #4338ca;
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+    }
+    
+    /* CPU Scheduling Simulator */
+    #simulator {
+      padding: 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 2rem 0;
+    }
+    
+    .steps {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .step {
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border-radius: 9999px;
+      font-weight: 500;
+    }
+    
+    .step.active {
+      background-color: #9b87f5;
+      color: white;
+    }
+    
+    .step:not(.active) {
+      background-color: #f1f0fb;
+      color: #6E59A5;
+    }
+    
+    .step-content {
+      display: none;
+    }
+    
+    .step-content.active {
+      display: block;
+    }
+    
+    /* Form controls */
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    
+    input:focus, select:focus {
+      outline: 2px solid #9b87f5;
+      border-color: #9b87f5;
+    }
+    
+    button {
+      background-color: #9b87f5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    button:hover {
+      background-color: #7E69AB;
+    }
+    
+    button.secondary {
+      background-color: #6c757d;
+    }
+    
+    button.secondary:hover {
+      background-color: #5a6268;
+    }
+    
+    /* Process table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    
+    th, td {
+      padding: 0.75rem;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    
+    th {
+      background-color: #f1f0fb;
+      font-weight: 600;
+      color: #6E59A5;
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 1rem;
+    }
+    
+    .tab {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .tab.active {
+      border-bottom: 2px solid #9b87f5;
+      color: #6E59A5;
+    }
+    
+    /* Gantt chart */
+    .gantt-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      padding: 0.5rem 0;
+    }
+    
+    .gantt {
+      display: flex;
+      min-width: max-content;
+    }
+    
+    .gantt-box {
+      padding: 1rem 0.5rem;
+      min-width: 60px;
+      text-align: center;
+      color: white;
+      font-weight: 500;
+      position: relative;
+      border-right: 1px dashed rgba(255,255,255,0.3);
+    }
+    
+    .time-marker {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      font-size: 0.75rem;
+      color: #666;
+    }
+    
+    .time-marker.end {
+      left: auto;
+      right: 0;
+    }
+    
+    /* Metrics */
+    .metrics {
+      background-color: #f1f0fb;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    
+    .metric-group {
+      display: inline-block;
+      margin: 0 1rem;
+    }
+    
+    .metric-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #6E59A5;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #e5e7eb;
+      color: #374151;
+      margin-top: 3rem;
+    }
+    
+    /* Form grid for two columns */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* List styles */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Additional utility classes */
+    .text-center {
+      text-align: center;
+    }
+    
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+    
+    .mt-4 {
+      margin-top: 1rem;
+    }
+    
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  
+.floating-logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(45deg, #facc15, #f472b6, #60a5fa, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: float-shine 4s infinite ease-in-out;
+}
+
+@keyframes float-shine {
+  0% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+  50% { transform: translateY(-3px); text-shadow: 0 0 20px rgba(255,255,255,0.9); }
+  100% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+}
+
+
+/* Modern enhancements */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  color: #1A1F2C;
+  padding-top: 4rem;
+}
+
+header {
+  background: #1f2937;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #334155;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 1.6rem;
+}
+
+nav ul {
+  gap: 2rem;
+}
+
+nav ul li a {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  color: #1e40af;
+}
+
+.accordion-header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.feature-card {
+  background: linear-gradient(to bottom right, #e0e7ff, #f5f3ff);
+  border: 1px solid #c7d2fe;
+}
+
+.card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+footer {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  section {
+    padding: 1.25rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .accordion-header {
+    font-size: 1rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gantt-box {
+    min-width: 40px;
+    font-size: 0.75rem;
+  }
+
+  table, th, td {
+    font-size: 0.85rem;
+  }
+
+  .tab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .steps {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step {
+    margin-bottom: 0.5rem;
+  }
+}
   </style>
-</head>
-<body>
+ </head>
+ <body>
   <header>
-    <div class="logo">OS Concepts</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="disk.html">Disk Scheduling</a>
-    </nav>
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+   <div class="logo floating-logo">
+    Intro to OS
+   </div>
+   <nav>
+    <a href="index.html">
+     Home
+    </a>
+    <a href="disk.html">
+     Disk Scheduling
+    </a>
+   </nav>
+   <button class="theme-toggle" onclick="toggleTheme()">
+    🌙
+   </button>
   </header>
-
   <div class="container">
-    <div class="tab-container">
-      <div class="tab-buttons">
-        <button class="tab-button active" onclick="openTab(event, 'disk-scheduling')">Disk Scheduling</button>
-        <button class="tab-button" onclick="openTab(event, 'page-replacement')">Page Replacement</button>
-        <button class="tab-button" onclick="openTab(event, 'memory-concepts')">Memory Concepts</button>
-        <button class="tab-button" onclick="openTab(event, 'file-management')">File Management</button>
-      </div>
-
-      <!-- Disk Scheduling Tab -->
-      <div id="disk-scheduling" class="tab-content active">
-        <div class="card">
-          <div class="card-header">
-            <h2>Disk Scheduling Algorithm Calculator</h2>
-            <p>Calculate and visualize different disk scheduling algorithms</p>
-          </div>
-          <div class="card-content">
-            <div class="grid">
-              <div>
-                <div class="form-group">
-                  <label for="head-position">Initial Head Position</label>
-                  <input type="number" id="head-position" value="50" min="0">
-                </div>
-                <div class="form-group">
-                  <label for="disk-size">Disk Size</label>
-                  <input type="number" id="disk-size" value="199" min="100" max="1000">
-                </div>
-                <div class="form-group">
-                  <label for="request-queue">Request Queue (comma separated)</label>
-                  <input type="text" id="request-queue" value="98,183,37,122,14,124,65,67">
-                </div>
-                <div class="form-group">
-                  <label for="algorithm">Select Algorithm</label>
-                  <select id="algorithm">
-                    <option value="FCFS">FCFS (First-Come First-Served)</option>
-                    <option value="SSTF">SSTF (Shortest Seek Time First)</option>
-                    <option value="SCAN">SCAN (Elevator Algorithm)</option>
-                    <option value="CSCAN">C-SCAN (Circular SCAN)</option>
-                  </select>
-                </div>
-                <button onclick="calculateDiskScheduling()">Calculate</button>
-                <div id="disk-result" class="result"></div>
-              </div>
-              <div class="chart-container" id="disk-chart">
-                <div class="chart-axis"></div>
-                <div class="chart-axis-x"></div>
-                <!-- Chart will be rendered here -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Page Replacement Tab -->
-      <div id="page-replacement" class="tab-content">
-        <div class="card">
-          <div class="card-header">
-            <h2>Memory Page Replacement Calculator</h2>
-            <p>Calculate and visualize page replacement algorithms</p>
-          </div>
-          <div class="card-content">
-            <div class="form-group">
-              <label for="page-reference">Page Reference String (comma separated)</label>
-              <input type="text" id="page-reference" value="7,0,1,2,0,3,0,4,2,3,0,3,2,1,2">
-            </div>
-            <div class="form-group">
-              <label for="frame-count">Number of Frames</label>
-              <input type="number" id="frame-count" value="3" min="1" max="10">
-            </div>
-            <div class="form-group">
-              <label for="page-algorithm">Select Algorithm</label>
-              <select id="page-algorithm">
-                <option value="FIFO">FIFO (First-In First-Out)</option>
-                <option value="LRU">LRU (Least Recently Used)</option>
-                <option value="Optimal">Optimal</option>
-              </select>
-            </div>
-            <button onclick="calculatePageReplacement()">Calculate</button>
-            <div id="page-result" class="result"></div>
-            <div id="page-table-container"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Memory Concepts Tab -->
-      <div id="memory-concepts" class="tab-content">
-        <details open>
-          <summary>Memory Management</summary>
-          <p><strong>Basic Concept:</strong> Memory management is responsible for managing a computer's primary memory. It keeps track of each byte in memory and allocates memory to processes as needed.</p>
-          <p><strong>Logical and Physical Address Map:</strong> Logical addresses are generated by the CPU, while physical addresses point to actual locations in memory. The Memory Management Unit (MMU) translates logical to physical addresses.</p>
-          <p><strong>Contiguous Memory Allocation:</strong> This involves allocating a single contiguous block of memory to a process. Fixed partitioning divides memory into fixed sizes, whereas variable partitioning allows different sizes. It may cause internal (unused space inside a partition) or external (unused space between partitions) fragmentation. Compaction helps by shuffling processes to combine free memory.</p>
-          <p><strong>Paging:</strong> Memory is divided into fixed-size pages and frames. The CPU generates page numbers and offsets. A page table maps pages to frames. Hardware like TLBs (Translation Lookaside Buffers) supports fast mapping. Protection and sharing mechanisms prevent illegal access and allow shared memory segments.</p>
-          <p><strong>Segmentation:</strong> Unlike paging, segmentation divides memory logically into code, stack, and data segments. Each segment has a base and limit, aiding in protection and logical separation.</p>
-          <p><strong>Virtual Memory:</strong> Allows processes to use more memory than physically available. It relies on techniques like demand paging where pages are loaded only when required. Key concepts include page fault, working set, dirty page, and locality of reference.</p>
-          <p><strong>Page Replacement Algorithms:</strong> - <strong>Optimal</strong>: Replaces the page not used for longest future time. - <strong>FIFO</strong>: Replaces the oldest loaded page. - <strong>LRU</strong>: Replaces the least recently used page.</p>
-        </details>
-      </div>
-
-      <!-- File Management Tab -->
-      <div id="file-management" class="tab-content">
-        <details open>
-          <summary>File & I/O Management</summary>
-          <p><strong>File Concept:</strong> A file is a named collection of data. File management involves creating, reading, writing, and organizing files.</p>
-          <p><strong>Access Methods:</strong> Sequential (line-by-line) and Direct access (jump to a location).</p>
-          <p><strong>File Types & Operations:</strong> Text, binary, executable. Operations include create, open, read, write, delete, and close.</p>
-          <p><strong>Directory Structure:</strong> Single-level, two-level, tree-structured, acyclic graph, and general graph directory structures organize files efficiently.</p>
-          <p><strong>File System Structure:</strong> Includes boot block, superblock, inode table, and data blocks.</p>
-          <p><strong>Allocation Methods:</strong> - Contiguous: Easy but may lead to fragmentation. - Linked: Overhead of pointers. - Indexed: Uses index block for fast access.</p>
-          <p><strong>Free Space Management:</strong> Bitmaps (bit vector), linked lists, and grouping help track free disk space.</p>
-          <p><strong>File Recovery:</strong> Helps restore deleted or corrupted files using journaling or backup techniques.</p>
-
-          <h3>I/O Management</h3>
-          <p><strong>I/O Hardware:</strong> Includes I/O devices, device controllers, and direct memory access (DMA) modules.</p>
-          <p><strong>I/O Software:</strong> Includes interrupt handlers (detect hardware signals), device drivers (interface between OS and hardware).</p>
-          <p><strong>Disk Scheduling Algorithms:</strong> Decide order of disk access to improve performance.</p>
-          <ul>
-            <li><strong>FCFS</strong> – Serve requests in arrival order.</li>
-            <li><strong>SSTF</strong> – Serve nearest track request.</li>
-            <li><strong>SCAN</strong> – Elevator algorithm: move inward, then reverse.</li>
-            <li><strong>C-SCAN</strong> – Like SCAN, but always move one direction and jump back.</li>
-          </ul>
-        </details>
-      </div>
+   <div class="tab-container">
+    <div class="tab-buttons">
+     <button class="tab-button active" onclick="openTab(event, 'disk-scheduling')">
+      Disk Scheduling
+     </button>
+     <button class="tab-button" onclick="openTab(event, 'page-replacement')">
+      Page Replacement
+     </button>
+     <button class="tab-button" onclick="openTab(event, 'memory-concepts')">
+      Memory Concepts
+     </button>
+     <button class="tab-button" onclick="openTab(event, 'file-management')">
+      File Management
+     </button>
     </div>
+    <!-- Disk Scheduling Tab -->
+    <div class="tab-content active" id="disk-scheduling">
+     <div class="card">
+      <div class="card-header">
+       <h2>
+        Disk Scheduling Algorithm Calculator
+       </h2>
+       <p>
+        Calculate and visualize different disk scheduling algorithms
+       </p>
+      </div>
+      <div class="card-content">
+       <div class="grid">
+        <div>
+         <div class="form-group">
+          <label for="head-position">
+           Initial Head Position
+          </label>
+          <input id="head-position" min="0" type="number" value="50"/>
+         </div>
+         <div class="form-group">
+          <label for="disk-size">
+           Disk Size
+          </label>
+          <input id="disk-size" max="1000" min="100" type="number" value="199"/>
+         </div>
+         <div class="form-group">
+          <label for="request-queue">
+           Request Queue (comma separated)
+          </label>
+          <input id="request-queue" type="text" value="98,183,37,122,14,124,65,67"/>
+         </div>
+         <div class="form-group">
+          <label for="algorithm">
+           Select Algorithm
+          </label>
+          <select id="algorithm">
+           <option value="FCFS">
+            FCFS (First-Come First-Served)
+           </option>
+           <option value="SSTF">
+            SSTF (Shortest Seek Time First)
+           </option>
+           <option value="SCAN">
+            SCAN (Elevator Algorithm)
+           </option>
+           <option value="CSCAN">
+            C-SCAN (Circular SCAN)
+           </option>
+          </select>
+         </div>
+         <button onclick="calculateDiskScheduling()">
+          Calculate
+         </button>
+         <div class="result" id="disk-result">
+         </div>
+        </div>
+        <div class="chart-container" id="disk-chart">
+         <div class="chart-axis">
+         </div>
+         <div class="chart-axis-x">
+         </div>
+         <!-- Chart will be rendered here -->
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- Page Replacement Tab -->
+    <div class="tab-content" id="page-replacement">
+     <div class="card">
+      <div class="card-header">
+       <h2>
+        Memory Page Replacement Calculator
+       </h2>
+       <p>
+        Calculate and visualize page replacement algorithms
+       </p>
+      </div>
+      <div class="card-content">
+       <div class="form-group">
+        <label for="page-reference">
+         Page Reference String (comma separated)
+        </label>
+        <input id="page-reference" type="text" value="7,0,1,2,0,3,0,4,2,3,0,3,2,1,2"/>
+       </div>
+       <div class="form-group">
+        <label for="frame-count">
+         Number of Frames
+        </label>
+        <input id="frame-count" max="10" min="1" type="number" value="3"/>
+       </div>
+       <div class="form-group">
+        <label for="page-algorithm">
+         Select Algorithm
+        </label>
+        <select id="page-algorithm">
+         <option value="FIFO">
+          FIFO (First-In First-Out)
+         </option>
+         <option value="LRU">
+          LRU (Least Recently Used)
+         </option>
+         <option value="Optimal">
+          Optimal
+         </option>
+        </select>
+       </div>
+       <button onclick="calculatePageReplacement()">
+        Calculate
+       </button>
+       <div class="result" id="page-result">
+       </div>
+       <div id="page-table-container">
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- Memory Concepts Tab -->
+    <div class="tab-content" id="memory-concepts">
+     <details open="">
+      <summary>
+       Memory Management
+      </summary>
+      <p>
+       <strong>
+        Basic Concept:
+       </strong>
+       Memory management is responsible for managing a computer's primary memory. It keeps track of each byte in memory and allocates memory to processes as needed.
+      </p>
+      <p>
+       <strong>
+        Logical and Physical Address Map:
+       </strong>
+       Logical addresses are generated by the CPU, while physical addresses point to actual locations in memory. The Memory Management Unit (MMU) translates logical to physical addresses.
+      </p>
+      <p>
+       <strong>
+        Contiguous Memory Allocation:
+       </strong>
+       This involves allocating a single contiguous block of memory to a process. Fixed partitioning divides memory into fixed sizes, whereas variable partitioning allows different sizes. It may cause internal (unused space inside a partition) or external (unused space between partitions) fragmentation. Compaction helps by shuffling processes to combine free memory.
+      </p>
+      <p>
+       <strong>
+        Paging:
+       </strong>
+       Memory is divided into fixed-size pages and frames. The CPU generates page numbers and offsets. A page table maps pages to frames. Hardware like TLBs (Translation Lookaside Buffers) supports fast mapping. Protection and sharing mechanisms prevent illegal access and allow shared memory segments.
+      </p>
+      <p>
+       <strong>
+        Segmentation:
+       </strong>
+       Unlike paging, segmentation divides memory logically into code, stack, and data segments. Each segment has a base and limit, aiding in protection and logical separation.
+      </p>
+      <p>
+       <strong>
+        Virtual Memory:
+       </strong>
+       Allows processes to use more memory than physically available. It relies on techniques like demand paging where pages are loaded only when required. Key concepts include page fault, working set, dirty page, and locality of reference.
+      </p>
+      <p>
+       <strong>
+        Page Replacement Algorithms:
+       </strong>
+       -
+       <strong>
+        Optimal
+       </strong>
+       : Replaces the page not used for longest future time. -
+       <strong>
+        FIFO
+       </strong>
+       : Replaces the oldest loaded page. -
+       <strong>
+        LRU
+       </strong>
+       : Replaces the least recently used page.
+      </p>
+     </details>
+    </div>
+    <!-- File Management Tab -->
+    <div class="tab-content" id="file-management">
+     <details open="">
+      <summary>
+       File &amp; I/O Management
+      </summary>
+      <p>
+       <strong>
+        File Concept:
+       </strong>
+       A file is a named collection of data. File management involves creating, reading, writing, and organizing files.
+      </p>
+      <p>
+       <strong>
+        Access Methods:
+       </strong>
+       Sequential (line-by-line) and Direct access (jump to a location).
+      </p>
+      <p>
+       <strong>
+        File Types &amp; Operations:
+       </strong>
+       Text, binary, executable. Operations include create, open, read, write, delete, and close.
+      </p>
+      <p>
+       <strong>
+        Directory Structure:
+       </strong>
+       Single-level, two-level, tree-structured, acyclic graph, and general graph directory structures organize files efficiently.
+      </p>
+      <p>
+       <strong>
+        File System Structure:
+       </strong>
+       Includes boot block, superblock, inode table, and data blocks.
+      </p>
+      <p>
+       <strong>
+        Allocation Methods:
+       </strong>
+       - Contiguous: Easy but may lead to fragmentation. - Linked: Overhead of pointers. - Indexed: Uses index block for fast access.
+      </p>
+      <p>
+       <strong>
+        Free Space Management:
+       </strong>
+       Bitmaps (bit vector), linked lists, and grouping help track free disk space.
+      </p>
+      <p>
+       <strong>
+        File Recovery:
+       </strong>
+       Helps restore deleted or corrupted files using journaling or backup techniques.
+      </p>
+      <h3>
+       I/O Management
+      </h3>
+      <p>
+       <strong>
+        I/O Hardware:
+       </strong>
+       Includes I/O devices, device controllers, and direct memory access (DMA) modules.
+      </p>
+      <p>
+       <strong>
+        I/O Software:
+       </strong>
+       Includes interrupt handlers (detect hardware signals), device drivers (interface between OS and hardware).
+      </p>
+      <p>
+       <strong>
+        Disk Scheduling Algorithms:
+       </strong>
+       Decide order of disk access to improve performance.
+      </p>
+      <ul>
+       <li>
+        <strong>
+         FCFS
+        </strong>
+        – Serve requests in arrival order.
+       </li>
+       <li>
+        <strong>
+         SSTF
+        </strong>
+        – Serve nearest track request.
+       </li>
+       <li>
+        <strong>
+         SCAN
+        </strong>
+        – Elevator algorithm: move inward, then reverse.
+       </li>
+       <li>
+        <strong>
+         C-SCAN
+        </strong>
+        – Like SCAN, but always move one direction and jump back.
+       </li>
+      </ul>
+     </details>
+    </div>
+   </div>
   </div>
-
   <script>
-    // Theme switching
+   // Theme switching
     function toggleTheme() {
       document.body.classList.toggle('dark');
       const themeButton = document.querySelector('.theme-toggle');
@@ -884,5 +1961,5 @@
       tableContainer.appendChild(table);
     }
   </script>
-</body>
+ </body>
 </html>

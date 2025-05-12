@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Operating Systems Concepts - CPU Scheduling Simulator</title>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Operating Systems Concepts - CPU Scheduling Simulator
+  </title>
   <style>
-    /* General styling */
+   /* General styling */
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       padding: 20px;
@@ -225,147 +227,1117 @@
     .step-content.active {
       display: block;
     }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>CPU Scheduling Simulator</h1>
-    
-    <div class="steps-container">
-      <div class="step active" data-step="1">1. Select Algorithm</div>
-      <div class="step" data-step="2">2. Add Processes</div>
-      <div class="step" data-step="3">3. View Results</div>
-    </div>
-    
-    <div class="step-content active" id="step1">
-      <div class="card">
-        <h2>Select Scheduling Algorithm</h2>
-        <div class="form-group">
-          <label for="algorithm">Choose Algorithm:</label>
-          <select id="algorithm">
-            <option value="">-- Select Algorithm --</option>
-            <option value="FCFS">First Come First Served (FCFS)</option>
-            <option value="SJF">Shortest Job First (Non-Preemptive)</option>
-            <option value="SRTF">Shortest Remaining Time First (Preemptive)</option>
-            <option value="PRIORITY">Priority Scheduling (Non-Preemptive)</option>
-            <option value="RR">Round Robin</option>
-          </select>
-        </div>
-        
-        <div class="form-group" id="time-quantum-container" style="display:none;">
-          <label for="time-quantum">Time Quantum:</label>
-          <input type="number" id="time-quantum" min="1" value="2" />
-        </div>
-        
-        <button id="select-algorithm-btn">Continue to Add Processes</button>
-      </div>
-    </div>
-    
-    <div class="step-content" id="step2">
-      <div class="card">
-        <h2>Add Processes for <span id="selected-algorithm">Algorithm</span></h2>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="pid">Process ID:</label>
-            <input type="text" id="pid" placeholder="e.g. P1" required />
-          </div>
-          
-          <div class="form-group">
-            <label for="burst-time">Burst Time:</label>
-            <input type="number" id="burst-time" min="1" placeholder="e.g. 5" required />
-          </div>
-          
-          <div class="form-group">
-            <label for="arrival-time">Arrival Time:</label>
-            <input type="number" id="arrival-time" min="0" placeholder="e.g. 0" required />
-          </div>
-          
-          <div class="form-group" id="priority-container" style="display:none;">
-            <label for="priority">Priority (Lower is Higher):</label>
-            <input type="number" id="priority" min="1" placeholder="e.g. 2" />
-          </div>
-        </div>
-        
-        <button id="add-process-btn">Add Process</button>
-        <button id="go-back-btn" style="background-color: #6c757d; margin-left: 10px;">Back to Algorithm Selection</button>
-      </div>
-      
-      <div class="card process-list" id="process-list-container" style="display:none;">
-        <h2>Process List</h2>
-        <table id="process-table">
-          <thead>
-            <tr>
-              <th>Process ID</th>
-              <th>Arrival Time</th>
-              <th>Burst Time</th>
-              <th id="priority-header" style="display:none;">Priority</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="process-table-body">
-            <!-- Process entries will be populated here -->
-          </tbody>
-        </table>
-        
-        <button id="run-algorithm-btn" style="margin-top: 16px;">Run Algorithm</button>
-      </div>
-    </div>
-    
-    <div class="step-content" id="step3">
-      <div class="card" id="results-container">
-        <h2>Results for <span id="result-algorithm">Algorithm</span></h2>
-        
-        <div class="tabs">
-          <div class="tab active" data-tab="gantt">Gantt Chart</div>
-          <div class="tab" data-tab="table">Process Details</div>
-        </div>
-        
-        <div id="gantt-tab" class="tab-content">
-          <div class="gantt-container">
-            <div class="gantt" id="gantt-chart">
-              <!-- Gantt chart will be populated here -->
-            </div>
-          </div>
-        </div>
-        
-        <div id="table-tab" class="tab-content" style="display:none;">
-          <table id="results-table">
-            <thead>
-              <tr>
-                <th>Process ID</th>
-                <th>Arrival Time</th>
-                <th>Burst Time</th>
-                <th id="result-priority-header" style="display:none;">Priority</th>
-                <th>Start Time</th>
-                <th>Completion Time</th>
-                <th>Turnaround Time</th>
-                <th>Waiting Time</th>
-              </tr>
-            </thead>
-            <tbody id="results-body">
-              <!-- Results will be populated here -->
-            </tbody>
-          </table>
-        </div>
-        
-        <div class="metrics">
-          <div class="metric-group">
-            <div>Average Turnaround Time</div>
-            <div class="metric-value" id="avg-turnaround">0.00</div>
-          </div>
-          <div class="metric-group">
-            <div>Average Waiting Time</div>
-            <div class="metric-value" id="avg-waiting">0.00</div>
-          </div>
-        </div>
-        
-        <button id="start-over-btn" style="margin-top: 16px;">Start Over</button>
-      </div>
-    </div>
-  </div>
+   .floating-logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(45deg, #facc15, #f472b6, #60a5fa, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: float-shine 4s infinite ease-in-out;
+}
 
+@keyframes float-shine {
+  0% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+  50% { transform: translateY(-3px); text-shadow: 0 0 20px rgba(255,255,255,0.9); }
+  100% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+}
+   /* Responsive Enhancements */
+@media (max-width: 768px) {
+  header, .container, nav, .form-grid, .grid, .steps-container, .advantages-disadvantages {
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .logo {
+    font-size: 1.25rem !important;
+    text-align: center;
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  input, select, button {
+    font-size: 1rem;
+    padding: 0.75rem !important;
+  }
+
+  table, th, td {
+    font-size: 0.9rem;
+  }
+
+  .gantt-box {
+    min-width: 40px !important;
+    font-size: 0.75rem;
+  }
+
+  .step {
+    margin-bottom: 0.5rem;
+  }
+
+  h1, h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .tab-buttons {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tab-button {
+    flex: 1 1 auto;
+    min-width: 100px;
+  }
+}
+   /* Synced navbar styles from index */
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    /* CSS for just the feedback form in the footer */
+.footer {
+  background-color: #f1f5f9;
+  padding: 3rem 2rem 1.5rem;
+  margin-top: 3rem;
+}
+/* CSS for Team Information Section */
+.team-info {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.team-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #334155;
+  text-align: center;
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.team-member {
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 0.8rem;
+  border: 3px solid #e5deff;
+}
+
+.member-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-member h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.member-role {
+  color: #7E69AB;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0.3rem 0;
+}
+
+.member-bio {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+.team-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.stat {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #9b87f5;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 640px) {
+  .team-members {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feedback-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.form-row.double {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .form-row.double {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.submit-btn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #4338ca;
+}
+
+.submit-btn:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+}
+
+    body {
+      background-color: #f7f7f9;
+      color: #1A1F2C;
+      line-height: 1.6;
+    }
+    
+    /* Header */
+    header {
+      background-color: #1e40af;
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+      color: #93c5fd;
+    }
+    
+    /* Main Content */
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #4f46e5, #3b82f6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    
+    h2 {
+      color: #1e40af;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    /* Accordion Styles */
+    .accordion {
+      margin: 2rem 0;
+    }
+    
+    .accordion-item {
+      background: #ffffff;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    
+    .accordion-header {
+      padding: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #4f46e5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+      padding: 0 1rem;
+    }
+    
+    .accordion-item.active .accordion-content {
+      max-height: 1500px;
+      padding: 0 1rem 1rem;
+    }
+    
+    .accordion-header::after {
+      content: "⌄";
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+    
+    .accordion-item.active .accordion-header::after {
+      transform: rotate(180deg);
+    }
+    
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    .feature-card {
+      background-color: rgba(79, 70, 229, 0.05);
+      padding: 1.25rem;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    
+    .feature-card:hover {
+      background-color: rgba(79, 70, 229, 0.1);
+    }
+    
+    .feature-card h3 {
+      color: #4f46e5;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    /* Highlight Box */
+    .highlight {
+      background-color: rgba(79, 70, 229, 0.1);
+      border-left: 4px solid #4f46e5;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    /* Advantages/Disadvantages Grid */
+    .advantages-disadvantages {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    
+    @media (max-width: 768px) {
+      .advantages-disadvantages {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .advantages {
+      background-color: rgba(34, 197, 94, 0.1);
+      border-left: 4px solid #22c55e;
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .disadvantages {
+      background-color: rgba(239, 68, 68, 0.1);
+      border-left: 4px solid #ef4444;
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    /* Examples Box */
+    .examples {
+      background-color: rgba(59, 130, 246, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    
+    /* Tags */
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: #3b82f6;
+      color: white;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    /* Cards */
+    .card {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin: 1rem 0;
+      border: 1px solid #e2e8f0;
+    }
+    
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #4f46e5;
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s, background-color 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-size: 1.25rem;
+      z-index: 40;
+    }
+    
+    .back-to-top:hover {
+      background-color: #4338ca;
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+    }
+    
+    /* CPU Scheduling Simulator */
+    #simulator {
+      padding: 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 2rem 0;
+    }
+    
+    .steps {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .step {
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border-radius: 9999px;
+      font-weight: 500;
+    }
+    
+    .step.active {
+      background-color: #9b87f5;
+      color: white;
+    }
+    
+    .step:not(.active) {
+      background-color: #f1f0fb;
+      color: #6E59A5;
+    }
+    
+    .step-content {
+      display: none;
+    }
+    
+    .step-content.active {
+      display: block;
+    }
+    
+    /* Form controls */
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    
+    input:focus, select:focus {
+      outline: 2px solid #9b87f5;
+      border-color: #9b87f5;
+    }
+    
+    button {
+      background-color: #9b87f5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    button:hover {
+      background-color: #7E69AB;
+    }
+    
+    button.secondary {
+      background-color: #6c757d;
+    }
+    
+    button.secondary:hover {
+      background-color: #5a6268;
+    }
+    
+    /* Process table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    
+    th, td {
+      padding: 0.75rem;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    
+    th {
+      background-color: #f1f0fb;
+      font-weight: 600;
+      color: #6E59A5;
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 1rem;
+    }
+    
+    .tab {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .tab.active {
+      border-bottom: 2px solid #9b87f5;
+      color: #6E59A5;
+    }
+    
+    /* Gantt chart */
+    .gantt-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      padding: 0.5rem 0;
+    }
+    
+    .gantt {
+      display: flex;
+      min-width: max-content;
+    }
+    
+    .gantt-box {
+      padding: 1rem 0.5rem;
+      min-width: 60px;
+      text-align: center;
+      color: white;
+      font-weight: 500;
+      position: relative;
+      border-right: 1px dashed rgba(255,255,255,0.3);
+    }
+    
+    .time-marker {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      font-size: 0.75rem;
+      color: #666;
+    }
+    
+    .time-marker.end {
+      left: auto;
+      right: 0;
+    }
+    
+    /* Metrics */
+    .metrics {
+      background-color: #f1f0fb;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    
+    .metric-group {
+      display: inline-block;
+      margin: 0 1rem;
+    }
+    
+    .metric-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #6E59A5;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #e5e7eb;
+      color: #374151;
+      margin-top: 3rem;
+    }
+    
+    /* Form grid for two columns */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* List styles */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Additional utility classes */
+    .text-center {
+      text-align: center;
+    }
+    
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+    
+    .mt-4 {
+      margin-top: 1rem;
+    }
+    
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  
+.floating-logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(45deg, #facc15, #f472b6, #60a5fa, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: float-shine 4s infinite ease-in-out;
+}
+
+@keyframes float-shine {
+  0% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+  50% { transform: translateY(-3px); text-shadow: 0 0 20px rgba(255,255,255,0.9); }
+  100% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+}
+
+
+/* Modern enhancements */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  color: #1A1F2C;
+  padding-top: 4rem;
+}
+
+header {
+  background: #1f2937;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #334155;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 1.6rem;
+}
+
+nav ul {
+  gap: 2rem;
+}
+
+nav ul li a {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  color: #1e40af;
+}
+
+.accordion-header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.feature-card {
+  background: linear-gradient(to bottom right, #e0e7ff, #f5f3ff);
+  border: 1px solid #c7d2fe;
+}
+
+.card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+footer {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  section {
+    padding: 1.25rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .accordion-header {
+    font-size: 1rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gantt-box {
+    min-width: 40px;
+    font-size: 0.75rem;
+  }
+
+  table, th, td {
+    font-size: 0.85rem;
+  }
+
+  .tab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .steps {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step {
+    margin-bottom: 0.5rem;
+  }
+}
+  </style>
+ </head>
+ <body>
+  <div class="container">
+   <h1>
+    CPU Scheduling Simulator
+   </h1>
+   <div class="steps-container">
+    <div class="step active" data-step="1">
+     1. Select Algorithm
+    </div>
+    <div class="step" data-step="2">
+     2. Add Processes
+    </div>
+    <div class="step" data-step="3">
+     3. View Results
+    </div>
+   </div>
+   <div class="step-content active" id="step1">
+    <div class="card">
+     <h2>
+      Select Scheduling Algorithm
+     </h2>
+     <div class="form-group">
+      <label for="algorithm">
+       Choose Algorithm:
+      </label>
+      <select id="algorithm">
+       <option value="">
+        -- Select Algorithm --
+       </option>
+       <option value="FCFS">
+        First Come First Served (FCFS)
+       </option>
+       <option value="SJF">
+        Shortest Job First (Non-Preemptive)
+       </option>
+       <option value="SRTF">
+        Shortest Remaining Time First (Preemptive)
+       </option>
+       <option value="PRIORITY">
+        Priority Scheduling (Non-Preemptive)
+       </option>
+       <option value="RR">
+        Round Robin
+       </option>
+      </select>
+     </div>
+     <div class="form-group" id="time-quantum-container" style="display:none;">
+      <label for="time-quantum">
+       Time Quantum:
+      </label>
+      <input id="time-quantum" min="1" type="number" value="2"/>
+     </div>
+     <button id="select-algorithm-btn">
+      Continue to Add Processes
+     </button>
+    </div>
+   </div>
+   <div class="step-content" id="step2">
+    <div class="card">
+     <h2>
+      Add Processes for
+      <span id="selected-algorithm">
+       Algorithm
+      </span>
+     </h2>
+     <div class="form-grid">
+      <div class="form-group">
+       <label for="pid">
+        Process ID:
+       </label>
+       <input id="pid" placeholder="e.g. P1" required="" type="text"/>
+      </div>
+      <div class="form-group">
+       <label for="burst-time">
+        Burst Time:
+       </label>
+       <input id="burst-time" min="1" placeholder="e.g. 5" required="" type="number"/>
+      </div>
+      <div class="form-group">
+       <label for="arrival-time">
+        Arrival Time:
+       </label>
+       <input id="arrival-time" min="0" placeholder="e.g. 0" required="" type="number"/>
+      </div>
+      <div class="form-group" id="priority-container" style="display:none;">
+       <label for="priority">
+        Priority (Lower is Higher):
+       </label>
+       <input id="priority" min="1" placeholder="e.g. 2" type="number"/>
+      </div>
+     </div>
+     <button id="add-process-btn">
+      Add Process
+     </button>
+     <button id="go-back-btn" style="background-color: #6c757d; margin-left: 10px;">
+      Back to Algorithm Selection
+     </button>
+    </div>
+    <div class="card process-list" id="process-list-container" style="display:none;">
+     <h2>
+      Process List
+     </h2>
+     <table id="process-table">
+      <thead>
+       <tr>
+        <th>
+         Process ID
+        </th>
+        <th>
+         Arrival Time
+        </th>
+        <th>
+         Burst Time
+        </th>
+        <th id="priority-header" style="display:none;">
+         Priority
+        </th>
+        <th>
+         Action
+        </th>
+       </tr>
+      </thead>
+      <tbody id="process-table-body">
+       <!-- Process entries will be populated here -->
+      </tbody>
+     </table>
+     <button id="run-algorithm-btn" style="margin-top: 16px;">
+      Run Algorithm
+     </button>
+    </div>
+   </div>
+   <div class="step-content" id="step3">
+    <div class="card" id="results-container">
+     <h2>
+      Results for
+      <span id="result-algorithm">
+       Algorithm
+      </span>
+     </h2>
+     <div class="tabs">
+      <div class="tab active" data-tab="gantt">
+       Gantt Chart
+      </div>
+      <div class="tab" data-tab="table">
+       Process Details
+      </div>
+     </div>
+     <div class="tab-content" id="gantt-tab">
+      <div class="gantt-container">
+       <div class="gantt" id="gantt-chart">
+        <!-- Gantt chart will be populated here -->
+       </div>
+      </div>
+     </div>
+     <div class="tab-content" id="table-tab" style="display:none;">
+      <table id="results-table">
+       <thead>
+        <tr>
+         <th>
+          Process ID
+         </th>
+         <th>
+          Arrival Time
+         </th>
+         <th>
+          Burst Time
+         </th>
+         <th id="result-priority-header" style="display:none;">
+          Priority
+         </th>
+         <th>
+          Start Time
+         </th>
+         <th>
+          Completion Time
+         </th>
+         <th>
+          Turnaround Time
+         </th>
+         <th>
+          Waiting Time
+         </th>
+        </tr>
+       </thead>
+       <tbody id="results-body">
+        <!-- Results will be populated here -->
+       </tbody>
+      </table>
+     </div>
+     <div class="metrics">
+      <div class="metric-group">
+       <div>
+        Average Turnaround Time
+       </div>
+       <div class="metric-value" id="avg-turnaround">
+        0.00
+       </div>
+      </div>
+      <div class="metric-group">
+       <div>
+        Average Waiting Time
+       </div>
+       <div class="metric-value" id="avg-waiting">
+        0.00
+       </div>
+      </div>
+     </div>
+     <button id="start-over-btn" style="margin-top: 16px;">
+      Start Over
+     </button>
+    </div>
+   </div>
+  </div>
   <script>
-    // Global variables
+   // Global variables
     let currentStep = 1;
     let selectedAlgorithm = '';
     let processes = [];
@@ -1028,5 +2000,5 @@
       return colors[index];
     }
   </script>
-</body>
+ </body>
 </html>

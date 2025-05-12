@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Operating System Types</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Operating System Types
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
   <style>
-    :root {
+   :root {
       --primary-color: #4f46e5;
       --secondary-color: #818cf8;
       --accent-color: #3b82f6;
@@ -303,432 +305,1844 @@
       --text-color: #f8fafc;
       --text-light: #cbd5e1;
     }
-  </style>
-</head>
-<body>
-  <a href="index.html"><i class="fas fa-home"></i>🏠🏠</a>
-  <div class="theme-switch" id="themeSwitch">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-      <path d="M12 22C17.5228 22 22 17.5228 22 12C22 11.5373 21.3065 11.4608 21.0672 11.8568C19.9289 13.7406 17.8615 15 15.5 15C11.9101 15 9 12.0899 9 8.5C9 6.13845 10.2594 4.07105 12.1432 2.93276C12.5392 2.69347 12.4627 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>
-    </svg>
-  </div>
+   .floating-logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(45deg, #facc15, #f472b6, #60a5fa, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: float-shine 4s infinite ease-in-out;
+}
 
-  <div class="container">
-    <header>
-      <h1><span class="gradient-text">Operating Systems</span> and Their Types</h1>
-      <p class="subtitle">An in-depth exploration of various operating systems that power our digital world</p>
-    </header>
+@keyframes float-shine {
+  0% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+  50% { transform: translateY(-3px); text-shadow: 0 0 20px rgba(255,255,255,0.9); }
+  100% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+}
+   /* Responsive Enhancements */
+@media (max-width: 768px) {
+  header, .container, nav, .form-grid, .grid, .steps-container, .advantages-disadvantages {
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 1rem;
+  }
 
-    <div class="section active">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">What is an Operating System?</div>
-      <div class="section-content">
-        <p>An operating system (OS) is system software that acts as an intermediary between computer hardware and users. It provides a platform for users and application programs to interact with the hardware. The operating system is responsible for managing hardware resources like CPU, memory, input/output devices, and storage.</p>
-        
-        <p>The OS handles essential functions such as process management, memory management, file systems, device control, and security. It ensures that tasks are executed efficiently, and system resources are allocated properly. Without an operating system, users would need to interact with hardware directly, which would be complex and inefficient.</p>
-        
-        <div class="highlight">
-          <p>An operating system serves as a resource manager, interface provider, and service center for computer hardware and software.</p>
-        </div>
+  .logo {
+    font-size: 1.25rem !important;
+    text-align: center;
+    width: 100%;
+  }
 
-        <h2>Core Functions of Operating Systems</h2>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <h3>Process Management</h3>
-            <p>Creating, scheduling, and terminating processes and threads</p>
-          </div>
-          <div class="feature-card">
-            <h3>Memory Management</h3>
-            <p>Allocating and deallocating memory space as needed</p>
-          </div>
-          <div class="feature-card">
-            <h3>File System Management</h3>
-            <p>Creating, accessing, and maintaining file structures</p>
-          </div>
-          <div class="feature-card">
-            <h3>I/O Management</h3>
-            <p>Controlling input/output devices and communications</p>
-          </div>
-          <div class="feature-card">
-            <h3>Security Management</h3>
-            <p>Protecting system resources and user data</p>
-          </div>
-          <div class="feature-card">
-            <h3>User Interface</h3>
-            <p>Providing GUI or CLI for user interaction</p>
-          </div>
-        </div>
+  nav a {
+    display: block;
+    margin: 0.5rem 0;
+  }
 
-        <p>Operating systems can be found in desktops, laptops, smartphones, embedded devices, and servers. Common examples include Windows, Linux, macOS, Android, and iOS. Each is tailored for specific hardware and user requirements. OS design can vary depending on whether it needs to prioritize speed, security, multitasking, or real-time processing.</p>
-      </div>
-    </div>
+  .form-group {
+    width: 100%;
+  }
 
-    <!-- Types of OS sections follow here -->
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">1. Batch Operating System</div>
-      <div class="section-content">
-        <p>Batch operating systems were the earliest form of OS. Users did not interact directly with the system. Instead, tasks were collected, grouped based on requirements, and processed in batches. These jobs were executed one after the other with minimal idle CPU time.</p>
-        
-        <p>Batch OS uses job control languages (JCL) and is efficient for similar jobs. For example, payroll systems and large-scale data processing benefit from batch processing.</p>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Resource Utilization:</strong> High efficiency in CPU usage</li>
-              <li><strong>Low Idle Time:</strong> Continuous processing of jobs</li>
-              <li><strong>Automation:</strong> No user intervention needed during execution</li>
-              <li><strong>Cost-Effective:</strong> Useful for repetitive tasks</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>No Interaction:</strong> Users cannot interact during execution</li>
-              <li><strong>Turnaround Time:</strong> Long wait times for job completion</li>
-              <li><strong>Debugging:</strong> Difficult to debug batch processes</li>
-              <li><strong>CPU Utilization:</strong> I/O-bound jobs may cause CPU underutilization</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>IBM OS/360, UNIVAC systems, IBM z/OS (modern implementation for mainframes)</p>
-          <div class="tags">
-            <span class="tag">Historical</span>
-            <span class="tag">Mainframes</span>
-            <span class="tag">Data Processing</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  input, select, button {
+    font-size: 1rem;
+    padding: 0.75rem !important;
+  }
 
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">2. Time-Sharing Operating System</div>
-      <div class="section-content">
-        <p>Time-sharing OS allows multiple users to use the system simultaneously. Each user gets a time slice of the CPU, managed by the scheduler. The system switches rapidly between users to give the illusion of direct interaction.</p>
-        
-        <p>It introduced multitasking and allowed better utilization of CPU time. Key characteristics include responsiveness, scheduling algorithms, and terminal access.</p>
-        
-        <div class="highlight">
-          <p>Time-sharing systems brought about the concept of <strong>interactive computing</strong>, where users could directly interact with the computer while it was processing.</p>
-        </div>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Interactive Computing:</strong> Real-time user interaction</li>
-              <li><strong>Fair Resource Allocation:</strong> CPU time is distributed equitably</li>
-              <li><strong>Multiprogramming:</strong> Multiple programs can run concurrently</li>
-              <li><strong>User Experience:</strong> Each user feels they have dedicated access</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Security Challenges:</strong> Multiple users increase security risks</li>
-              <li><strong>Complex Scheduling:</strong> Needs sophisticated scheduling algorithms</li>
-              <li><strong>Resource Intensive:</strong> Requires more memory and system resources</li>
-              <li><strong>Performance Issues:</strong> Can slow down with too many users</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>MULTICS, UNIX, Linux, macOS, Windows (modern operating systems incorporate time-sharing principles)</p>
-          <div class="tags">
-            <span class="tag">Multitasking</span>
-            <span class="tag">Interactive</span>
-            <span class="tag">Multi-user</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  table, th, td {
+    font-size: 0.9rem;
+  }
 
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">3. Distributed Operating System</div>
-      <div class="section-content">
-        <p>Distributed OS runs on a group of networked computers and manages resources collectively. The system appears as a single machine to users even though computation is shared across devices.</p>
-        
-        <p>It offers load balancing, resource sharing, and fault tolerance. These OS are vital in cloud computing and cluster-based systems.</p>
-        
-        <div class="highlight">
-          <p>Distributed OS provides transparency, making multiple physical machines appear as a single system to users and applications.</p>
-        </div>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Reliability:</strong> Fault tolerance through redundancy</li>
-              <li><strong>Scalability:</strong> Easy to add more nodes as demand increases</li>
-              <li><strong>Resource Sharing:</strong> Efficient utilization of combined resources</li>
-              <li><strong>Performance:</strong> Parallel processing improves speed</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Complexity:</strong> Difficult to design, implement and maintain</li>
-              <li><strong>Network Dependency:</strong> Vulnerable to network issues</li>
-              <li><strong>Security Concerns:</strong> More attack surfaces across nodes</li>
-              <li><strong>Consistency Issues:</strong> Data coherence challenges across nodes</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>Amoeba, Plan 9, Google Borg, Kubernetes, Apache Mesos, Microsoft Azure's underlying system</p>
-          <div class="tags">
-            <span class="tag">Cloud</span>
-            <span class="tag">Clusters</span>
-            <span class="tag">Parallel Computing</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  .gantt-box {
+    min-width: 40px !important;
+    font-size: 0.75rem;
+  }
 
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">4. Network Operating System</div>
-      <div class="section-content">
-        <p>Network OS allows computers to communicate and share resources over a network. Unlike distributed OS, each node is independent and managed separately. Users are aware of multiple systems.</p>
-        
-        <p>Network OS supports file sharing, user access management, printers, and communication protocols. It is ideal for office or educational LAN environments.</p>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Centralized Management:</strong> Easier administration of resources</li>
-              <li><strong>Resource Sharing:</strong> Efficient use of hardware like printers</li>
-              <li><strong>Data Sharing:</strong> Files can be accessed across the network</li>
-              <li><strong>User Management:</strong> Centralized authentication and privileges</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Server Dependency:</strong> System relies on server availability</li>
-              <li><strong>Maintenance Cost:</strong> Requires dedicated IT staff</li>
-              <li><strong>Security Risks:</strong> Network vulnerabilities can affect all systems</li>
-              <li><strong>Performance:</strong> Network congestion can slow down operations</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>Windows Server, Novell NetWare, Linux Server distributions (Ubuntu Server, Red Hat Enterprise Linux), Cisco IOS</p>
-          <div class="tags">
-            <span class="tag">Client-Server</span>
-            <span class="tag">Enterprise</span>
-            <span class="tag">Resource Sharing</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  .step {
+    margin-bottom: 0.5rem;
+  }
 
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">5. Real-Time Operating System</div>
-      <div class="section-content">
-        <p>Real-Time OS is used where strict timing constraints are required. It must guarantee responses within a specific time limit. RTOS is used in embedded systems, robotics, avionics, and medical systems.</p>
-        
-        <div class="highlight">
-          <p>There are two main types of RTOS:</p>
-          <ul>
-            <li><strong>Hard RTOS:</strong> Guarantees task completion by deadlines; failure is critical (e.g., pacemakers, airbag systems)</li>
-            <li><strong>Soft RTOS:</strong> Tolerates occasional missed deadlines (e.g., video streaming, online gaming)</li>
-          </ul>
-        </div>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Determinism:</strong> Predictable response times</li>
-              <li><strong>Reliability:</strong> High system stability for critical applications</li>
-              <li><strong>Priority Handling:</strong> Efficiently manages task priorities</li>
-              <li><strong>Low Latency:</strong> Minimizes response delay</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Limited Features:</strong> Fewer capabilities than general-purpose OS</li>
-              <li><strong>Development Complexity:</strong> More challenging to program for</li>
-              <li><strong>Resource Constraints:</strong> Often runs on limited hardware</li>
-              <li><strong>Cost:</strong> Development and certification can be expensive</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>FreeRTOS, VxWorks, RTLinux, QNX, INTEGRITY RTOS</p>
-          <div class="tags">
-            <span class="tag">Embedded Systems</span>
-            <span class="tag">Deterministic</span>
-            <span class="tag">Mission Critical</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  h1, h2 {
+    font-size: 1.5rem !important;
+  }
 
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">6. Mobile Operating System</div>
-      <div class="section-content">
-        <p>Mobile OS is designed for smartphones and tablets. It supports wireless communication, touch input, limited memory, and power management. These systems handle app management, security, and sensor integration.</p>
-        
-        <p>Modern mobile operating systems are complex environments that balance performance with energy efficiency and provide rich user experiences through intuitive interfaces.</p>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>User-Friendly Interface:</strong> Intuitive touch-based interaction</li>
-              <li><strong>Energy Efficiency:</strong> Optimized for battery-powered devices</li>
-              <li><strong>App Ecosystem:</strong> Rich marketplace of applications</li>
-              <li><strong>Connectivity:</strong> Seamless integration with wireless networks</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Limited Multitasking:</strong> Restricted compared to desktop OS</li>
-              <li><strong>Security Vulnerabilities:</strong> Susceptible to mobile-specific attacks</li>
-              <li><strong>Hardware Limitations:</strong> Constrained by device capabilities</li>
-              <li><strong>Battery Dependency:</strong> Performance affected by power constraints</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>Android (Google), iOS (Apple), HarmonyOS (Huawei), KaiOS (for feature phones)</p>
-          <div class="tags">
-            <span class="tag">Smartphones</span>
-            <span class="tag">Tablets</span>
-            <span class="tag">Touch Interface</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  .tab-buttons {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">7. Embedded Operating System</div>
-      <div class="section-content">
-        <p>Embedded OS runs on devices that perform specific tasks — like washing machines, microwave ovens, routers, or industrial robots. These OS are lightweight and tailored to hardware constraints.</p>
-        
-        <p>They often run one application repeatedly and must be reliable and fast. Embedded OS frequently combines with real-time capabilities for time-sensitive applications.</p>
-        
-        <div class="highlight">
-          <p>With the growth of IoT (Internet of Things), embedded operating systems are becoming increasingly important in connecting everyday objects to networks and the internet.</p>
-        </div>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Low Power Consumption:</strong> Optimized for energy efficiency</li>
-              <li><strong>Fast Boot Time:</strong> Quick startup for immediate operation</li>
-              <li><strong>Reliability:</strong> Stable for continuous operation</li>
-              <li><strong>Task-Specific:</strong> Optimized for their dedicated function</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Limited Functionality:</strong> Designed for specific tasks only</li>
-              <li><strong>Hardware Dependency:</strong> Tightly coupled with specific hardware</li>
-              <li><strong>Update Difficulty:</strong> Often challenging to update or upgrade</li>
-              <li><strong>Development Complexity:</strong> Requires specialized knowledge</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>Embedded Linux, TinyOS, Contiki, RIOT OS, Zephyr, Amazon FreeRTOS</p>
-          <div class="tags">
-            <span class="tag">IoT</span>
-            <span class="tag">Specialized Hardware</span>
-            <span class="tag">Resource Constrained</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  .tab-button {
+    flex: 1 1 auto;
+    min-width: 100px;
+  }
+}
+   /* Synced navbar styles from index */
 
-    <div class="os-section">
-      <div class="section-title" onclick="toggleSection(this.parentElement)">8. Cloud Operating System</div>
-      <div class="section-content">
-        <p>Cloud OS is a relatively new category that manages cloud infrastructure and provides services to users over the internet. It abstracts physical hardware resources and offers them as virtualized services.</p>
-        
-        <p>These operating systems are designed to manage large-scale distributed resources and provide scalable, on-demand computing capabilities. They are the foundation of modern cloud computing infrastructure.</p>
-        
-        <div class="advantages-disadvantages">
-          <div class="advantages">
-            <h3>Advantages:</h3>
-            <ul>
-              <li><strong>Scalability:</strong> Easily scales resources up or down</li>
-              <li><strong>Accessibility:</strong> Available from anywhere with internet</li>
-              <li><strong>Cost-Effective:</strong> Pay-as-you-go model reduces expenses</li>
-              <li><strong>Resource Pooling:</strong> Efficient sharing of computing resources</li>
-            </ul>
-          </div>
-          
-          <div class="disadvantages">
-            <h3>Disadvantages:</h3>
-            <ul>
-              <li><strong>Internet Dependency:</strong> Requires stable connection</li>
-              <li><strong>Security Concerns:</strong> Data vulnerability in shared environments</li>
-              <li><strong>Limited Control:</strong> Less control over underlying hardware</li>
-              <li><strong>Learning Curve:</strong> Requires specialized knowledge</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="examples">
-          <h3>Examples:</h3>
-          <p>OpenStack, CloudStack, VMware vSphere, Microsoft Azure Stack, Google Anthos</p>
-          <div class="tags">
-            <span class="tag">Virtualization</span>
-            <span class="tag">IaaS</span>
-            <span class="tag">Elasticity</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    /* CSS for just the feedback form in the footer */
+.footer {
+  background-color: #f1f5f9;
+  padding: 3rem 2rem 1.5rem;
+  margin-top: 3rem;
+}
+/* CSS for Team Information Section */
+.team-info {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
 
-    <!-- References Section -->
-    <div class="reference">
-      <h3>References and Further Reading</h3>
-      <ul>
-        <li><a href="https://www.geeksforgeeks.org/types-of-operating-systems/" target="_blank">GeeksforGeeks - Types of Operating Systems</a></li>
-        <li><a href="https://www.tutorialspoint.com/operating_system/os_types.htm" target="_blank">TutorialsPoint - Operating System Types</a></li>
-        <li><a href="https://www.javatpoint.com/types-of-operating-system" target="_blank">JavaTPoint - Types of Operating System</a></li>
-        <li><a href="https://www.techtarget.com/whatis/definition/operating-system-OS" target="_blank">TechTarget - Operating System Definition</a></li>
-        <li><a href="https://www.ibm.com/topics/operating-systems" target="_blank">IBM - Operating Systems Overview</a></li>
-      </ul>
-    </div>
+.team-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #334155;
+  text-align: center;
+}
 
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.team-member {
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 0.8rem;
+  border: 3px solid #e5deff;
+}
+
+.member-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-member h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.member-role {
+  color: #7E69AB;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0.3rem 0;
+}
+
+.member-bio {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+.team-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.stat {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #9b87f5;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 640px) {
+  .team-members {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feedback-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.form-row.double {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .form-row.double {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #334155;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.submit-btn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #4338ca;
+}
+
+.submit-btn:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+}
+
+    body {
+      background-color: #f7f7f9;
+      color: #1A1F2C;
+      line-height: 1.6;
+    }
     
+    /* Header */
+    header {
+      background-color: #1e40af;
+      color: white;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+      color: #93c5fd;
+    }
+    
+    /* Main Content */
+    section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #4f46e5, #3b82f6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    
+    h2 {
+      color: #1e40af;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    /* Accordion Styles */
+    .accordion {
+      margin: 2rem 0;
+    }
+    
+    .accordion-item {
+      background: #ffffff;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    
+    .accordion-header {
+      padding: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #4f46e5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+      padding: 0 1rem;
+    }
+    
+    .accordion-item.active .accordion-content {
+      max-height: 1500px;
+      padding: 0 1rem 1rem;
+    }
+    
+    .accordion-header::after {
+      content: "⌄";
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+    
+    .accordion-item.active .accordion-header::after {
+      transform: rotate(180deg);
+    }
+    
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    .feature-card {
+      background-color: rgba(79, 70, 229, 0.05);
+      padding: 1.25rem;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    
+    .feature-card:hover {
+      background-color: rgba(79, 70, 229, 0.1);
+    }
+    
+    .feature-card h3 {
+      color: #4f46e5;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    /* Highlight Box */
+    .highlight {
+      background-color: rgba(79, 70, 229, 0.1);
+      border-left: 4px solid #4f46e5;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    /* Advantages/Disadvantages Grid */
+    .advantages-disadvantages {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    
+    @media (max-width: 768px) {
+      .advantages-disadvantages {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .advantages {
+      background-color: rgba(34, 197, 94, 0.1);
+      border-left: 4px solid #22c55e;
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .disadvantages {
+      background-color: rgba(239, 68, 68, 0.1);
+      border-left: 4px solid #ef4444;
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    /* Examples Box */
+    .examples {
+      background-color: rgba(59, 130, 246, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    
+    /* Tags */
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: #3b82f6;
+      color: white;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    /* Cards */
+    .card {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin: 1rem 0;
+      border: 1px solid #e2e8f0;
+    }
+    
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #4f46e5;
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s, background-color 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-size: 1.25rem;
+      z-index: 40;
+    }
+    
+    .back-to-top:hover {
+      background-color: #4338ca;
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+    }
+    
+    /* CPU Scheduling Simulator */
+    #simulator {
+      padding: 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 2rem 0;
+    }
+    
+    .steps {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .step {
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border-radius: 9999px;
+      font-weight: 500;
+    }
+    
+    .step.active {
+      background-color: #9b87f5;
+      color: white;
+    }
+    
+    .step:not(.active) {
+      background-color: #f1f0fb;
+      color: #6E59A5;
+    }
+    
+    .step-content {
+      display: none;
+    }
+    
+    .step-content.active {
+      display: block;
+    }
+    
+    /* Form controls */
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    
+    input:focus, select:focus {
+      outline: 2px solid #9b87f5;
+      border-color: #9b87f5;
+    }
+    
+    button {
+      background-color: #9b87f5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    button:hover {
+      background-color: #7E69AB;
+    }
+    
+    button.secondary {
+      background-color: #6c757d;
+    }
+    
+    button.secondary:hover {
+      background-color: #5a6268;
+    }
+    
+    /* Process table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    
+    th, td {
+      padding: 0.75rem;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    
+    th {
+      background-color: #f1f0fb;
+      font-weight: 600;
+      color: #6E59A5;
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 1rem;
+    }
+    
+    .tab {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .tab.active {
+      border-bottom: 2px solid #9b87f5;
+      color: #6E59A5;
+    }
+    
+    /* Gantt chart */
+    .gantt-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      padding: 0.5rem 0;
+    }
+    
+    .gantt {
+      display: flex;
+      min-width: max-content;
+    }
+    
+    .gantt-box {
+      padding: 1rem 0.5rem;
+      min-width: 60px;
+      text-align: center;
+      color: white;
+      font-weight: 500;
+      position: relative;
+      border-right: 1px dashed rgba(255,255,255,0.3);
+    }
+    
+    .time-marker {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      font-size: 0.75rem;
+      color: #666;
+    }
+    
+    .time-marker.end {
+      left: auto;
+      right: 0;
+    }
+    
+    /* Metrics */
+    .metrics {
+      background-color: #f1f0fb;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    
+    .metric-group {
+      display: inline-block;
+      margin: 0 1rem;
+    }
+    
+    .metric-value {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #6E59A5;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #e5e7eb;
+      color: #374151;
+      margin-top: 3rem;
+    }
+    
+    /* Form grid for two columns */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* List styles */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Additional utility classes */
+    .text-center {
+      text-align: center;
+    }
+    
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+    
+    .mt-4 {
+      margin-top: 1rem;
+    }
+    
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  
+.floating-logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(45deg, #facc15, #f472b6, #60a5fa, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: float-shine 4s infinite ease-in-out;
+}
+
+@keyframes float-shine {
+  0% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+  50% { transform: translateY(-3px); text-shadow: 0 0 20px rgba(255,255,255,0.9); }
+  100% { transform: translateY(0px); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+}
+
+
+/* Modern enhancements */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  color: #1A1F2C;
+  padding-top: 4rem;
+}
+
+header {
+  background: #1f2937;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #334155;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 1.6rem;
+}
+
+nav ul {
+  gap: 2rem;
+}
+
+nav ul li a {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  color: #1e40af;
+}
+
+.accordion-header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.feature-card {
+  background: linear-gradient(to bottom right, #e0e7ff, #f5f3ff);
+  border: 1px solid #c7d2fe;
+}
+
+.card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+footer {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  section {
+    padding: 1.25rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .accordion-header {
+    font-size: 1rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gantt-box {
+    min-width: 40px;
+    font-size: 0.75rem;
+  }
+
+  table, th, td {
+    font-size: 0.85rem;
+  }
+
+  .tab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .steps {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step {
+    margin-bottom: 0.5rem;
+  }
+}
+  </style>
+ </head>
+ <body>
+  <a href="index.html">
+   <i class="fas fa-home">
+   </i>
+   🏠🏠
+  </a>
+  <div class="theme-switch" id="themeSwitch">
+   <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 11.5373 21.3065 11.4608 21.0672 11.8568C19.9289 13.7406 17.8615 15 15.5 15C11.9101 15 9 12.0899 9 8.5C9 6.13845 10.2594 4.07105 12.1432 2.93276C12.5392 2.69347 12.4627 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z">
+    </path>
+   </svg>
   </div>
-
+  <div class="container">
+   <header>
+    <h1>
+     <span class="gradient-text">
+      Operating Systems
+     </span>
+     and Their Types
+    </h1>
+    <p class="subtitle">
+     An in-depth exploration of various operating systems that power our digital world
+    </p>
+   </header>
+   <div class="section active">
+    <div class="section-title" onclick="toggleSection(this.parentElement)">
+     What is an Operating System?
+    </div>
+    <div class="section-content">
+     <p>
+      An operating system (OS) is system software that acts as an intermediary between computer hardware and users. It provides a platform for users and application programs to interact with the hardware. The operating system is responsible for managing hardware resources like CPU, memory, input/output devices, and storage.
+     </p>
+     <p>
+      The OS handles essential functions such as process management, memory management, file systems, device control, and security. It ensures that tasks are executed efficiently, and system resources are allocated properly. Without an operating system, users would need to interact with hardware directly, which would be complex and inefficient.
+     </p>
+     <div class="highlight">
+      <p>
+       An operating system serves as a resource manager, interface provider, and service center for computer hardware and software.
+      </p>
+     </div>
+     <h2>
+      Core Functions of Operating Systems
+     </h2>
+     <div class="feature-grid">
+      <div class="feature-card">
+       <h3>
+        Process Management
+       </h3>
+       <p>
+        Creating, scheduling, and terminating processes and threads
+       </p>
+      </div>
+      <div class="feature-card">
+       <h3>
+        Memory Management
+       </h3>
+       <p>
+        Allocating and deallocating memory space as needed
+       </p>
+      </div>
+      <div class="feature-card">
+       <h3>
+        File System Management
+       </h3>
+       <p>
+        Creating, accessing, and maintaining file structures
+       </p>
+      </div>
+      <div class="feature-card">
+       <h3>
+        I/O Management
+       </h3>
+       <p>
+        Controlling input/output devices and communications
+       </p>
+      </div>
+      <div class="feature-card">
+       <h3>
+        Security Management
+       </h3>
+       <p>
+        Protecting system resources and user data
+       </p>
+      </div>
+      <div class="feature-card">
+       <h3>
+        User Interface
+       </h3>
+       <p>
+        Providing GUI or CLI for user interaction
+       </p>
+      </div>
+     </div>
+     <p>
+      Operating systems can be found in desktops, laptops, smartphones, embedded devices, and servers. Common examples include Windows, Linux, macOS, Android, and iOS. Each is tailored for specific hardware and user requirements. OS design can vary depending on whether it needs to prioritize speed, security, multitasking, or real-time processing.
+     </p>
+    </div>
+   </div>
+   <!-- Types of OS sections follow here -->
+   <div class="os-section">
+    <div class="section-title" onclick="toggleSection(this.parentElement)">
+     1. Batch Operating System
+    </div>
+    <div class="section-content">
+     <p>
+      Batch operating systems were the earliest form of OS. Users did not interact directly with the system. Instead, tasks were collected, grouped based on requirements, and processed in batches. These jobs were executed one after the other with minimal idle CPU time.
+     </p>
+     <p>
+      Batch OS uses job control languages (JCL) and is efficient for similar jobs. For example, payroll systems and large-scale data processing benefit from batch processing.
+     </p>
+     <div class="advantages-disadvantages">
+      <div class="advantages">
+       <h3>
+        Advantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Resource Utilization:
+         </strong>
+         High efficiency in CPU usage
+        </li>
+        <li>
+         <strong>
+          Low Idle Time:
+         </strong>
+         Continuous processing of jobs
+        </li>
+        <li>
+         <strong>
+          Automation:
+         </strong>
+         No user intervention needed during execution
+        </li>
+        <li>
+         <strong>
+          Cost-Effective:
+         </strong>
+         Useful for repetitive tasks
+        </li>
+       </ul>
+      </div>
+      <div class="disadvantages">
+       <h3>
+        Disadvantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          No Interaction:
+         </strong>
+         Users cannot interact during execution
+        </li>
+        <li>
+         <strong>
+          Turnaround Time:
+         </strong>
+         Long wait times for job completion
+        </li>
+        <li>
+         <strong>
+          Debugging:
+         </strong>
+         Difficult to debug batch processes
+        </li>
+        <li>
+         <strong>
+          CPU Utilization:
+         </strong>
+         I/O-bound jobs may cause CPU underutilization
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="examples">
+      <h3>
+       Examples:
+      </h3>
+      <p>
+       IBM OS/360, UNIVAC systems, IBM z/OS (modern implementation for mainframes)
+      </p>
+      <div class="tags">
+       <span class="tag">
+        Historical
+       </span>
+       <span class="tag">
+        Mainframes
+       </span>
+       <span class="tag">
+        Data Processing
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="os-section">
+    <div class="section-title" onclick="toggleSection(this.parentElement)">
+     2. Time-Sharing Operating System
+    </div>
+    <div class="section-content">
+     <p>
+      Time-sharing OS allows multiple users to use the system simultaneously. Each user gets a time slice of the CPU, managed by the scheduler. The system switches rapidly between users to give the illusion of direct interaction.
+     </p>
+     <p>
+      It introduced multitasking and allowed better utilization of CPU time. Key characteristics include responsiveness, scheduling algorithms, and terminal access.
+     </p>
+     <div class="highlight">
+      <p>
+       Time-sharing systems brought about the concept of
+       <strong>
+        interactive computing
+       </strong>
+       , where users could directly interact with the computer while it was processing.
+      </p>
+     </div>
+     <div class="advantages-disadvantages">
+      <div class="advantages">
+       <h3>
+        Advantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Interactive Computing:
+         </strong>
+         Real-time user interaction
+        </li>
+        <li>
+         <strong>
+          Fair Resource Allocation:
+         </strong>
+         CPU time is distributed equitably
+        </li>
+        <li>
+         <strong>
+          Multiprogramming:
+         </strong>
+         Multiple programs can run concurrently
+        </li>
+        <li>
+         <strong>
+          User Experience:
+         </strong>
+         Each user feels they have dedicated access
+        </li>
+       </ul>
+      </div>
+      <div class="disadvantages">
+       <h3>
+        Disadvantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Security Challenges:
+         </strong>
+         Multiple users increase security risks
+        </li>
+        <li>
+         <strong>
+          Complex Scheduling:
+         </strong>
+         Needs sophisticated scheduling algorithms
+        </li>
+        <li>
+         <strong>
+          Resource Intensive:
+         </strong>
+         Requires more memory and system resources
+        </li>
+        <li>
+         <strong>
+          Performance Issues:
+         </strong>
+         Can slow down with too many users
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="examples">
+      <h3>
+       Examples:
+      </h3>
+      <p>
+       MULTICS, UNIX, Linux, macOS, Windows (modern operating systems incorporate time-sharing principles)
+      </p>
+      <div class="tags">
+       <span class="tag">
+        Multitasking
+       </span>
+       <span class="tag">
+        Interactive
+       </span>
+       <span class="tag">
+        Multi-user
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="os-section">
+    <div class="section-title" onclick="toggleSection(this.parentElement)">
+     3. Distributed Operating System
+    </div>
+    <div class="section-content">
+     <p>
+      Distributed OS runs on a group of networked computers and manages resources collectively. The system appears as a single machine to users even though computation is shared across devices.
+     </p>
+     <p>
+      It offers load balancing, resource sharing, and fault tolerance. These OS are vital in cloud computing and cluster-based systems.
+     </p>
+     <div class="highlight">
+      <p>
+       Distributed OS provides transparency, making multiple physical machines appear as a single system to users and applications.
+      </p>
+     </div>
+     <div class="advantages-disadvantages">
+      <div class="advantages">
+       <h3>
+        Advantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Reliability:
+         </strong>
+         Fault tolerance through redundancy
+        </li>
+        <li>
+         <strong>
+          Scalability:
+         </strong>
+         Easy to add more nodes as demand increases
+        </li>
+        <li>
+         <strong>
+          Resource Sharing:
+         </strong>
+         Efficient utilization of combined resources
+        </li>
+        <li>
+         <strong>
+          Performance:
+         </strong>
+         Parallel processing improves speed
+        </li>
+       </ul>
+      </div>
+      <div class="disadvantages">
+       <h3>
+        Disadvantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Complexity:
+         </strong>
+         Difficult to design, implement and maintain
+        </li>
+        <li>
+         <strong>
+          Network Dependency:
+         </strong>
+         Vulnerable to network issues
+        </li>
+        <li>
+         <strong>
+          Security Concerns:
+         </strong>
+         More attack surfaces across nodes
+        </li>
+        <li>
+         <strong>
+          Consistency Issues:
+         </strong>
+         Data coherence challenges across nodes
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="examples">
+      <h3>
+       Examples:
+      </h3>
+      <p>
+       Amoeba, Plan 9, Google Borg, Kubernetes, Apache Mesos, Microsoft Azure's underlying system
+      </p>
+      <div class="tags">
+       <span class="tag">
+        Cloud
+       </span>
+       <span class="tag">
+        Clusters
+       </span>
+       <span class="tag">
+        Parallel Computing
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="os-section">
+    <div class="section-title" onclick="toggleSection(this.parentElement)">
+     4. Network Operating System
+    </div>
+    <div class="section-content">
+     <p>
+      Network OS allows computers to communicate and share resources over a network. Unlike distributed OS, each node is independent and managed separately. Users are aware of multiple systems.
+     </p>
+     <p>
+      Network OS supports file sharing, user access management, printers, and communication protocols. It is ideal for office or educational LAN environments.
+     </p>
+     <div class="advantages-disadvantages">
+      <div class="advantages">
+       <h3>
+        Advantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Centralized Management:
+         </strong>
+         Easier administration of resources
+        </li>
+        <li>
+         <strong>
+          Resource Sharing:
+         </strong>
+         Efficient use of hardware like printers
+        </li>
+        <li>
+         <strong>
+          Data Sharing:
+         </strong>
+         Files can be accessed across the network
+        </li>
+        <li>
+         <strong>
+          User Management:
+         </strong>
+         Centralized authentication and privileges
+        </li>
+       </ul>
+      </div>
+      <div class="disadvantages">
+       <h3>
+        Disadvantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Server Dependency:
+         </strong>
+         System relies on server availability
+        </li>
+        <li>
+         <strong>
+          Maintenance Cost:
+         </strong>
+         Requires dedicated IT staff
+        </li>
+        <li>
+         <strong>
+          Security Risks:
+         </strong>
+         Network vulnerabilities can affect all systems
+        </li>
+        <li>
+         <strong>
+          Performance:
+         </strong>
+         Network congestion can slow down operations
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="examples">
+      <h3>
+       Examples:
+      </h3>
+      <p>
+       Windows Server, Novell NetWare, Linux Server distributions (Ubuntu Server, Red Hat Enterprise Linux), Cisco IOS
+      </p>
+      <div class="tags">
+       <span class="tag">
+        Client-Server
+       </span>
+       <span class="tag">
+        Enterprise
+       </span>
+       <span class="tag">
+        Resource Sharing
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="os-section">
+    <div class="section-title" onclick="toggleSection(this.parentElement)">
+     5. Real-Time Operating System
+    </div>
+    <div class="section-content">
+     <p>
+      Real-Time OS is used where strict timing constraints are required. It must guarantee responses within a specific time limit. RTOS is used in embedded systems, robotics, avionics, and medical systems.
+     </p>
+     <div class="highlight">
+      <p>
+       There are two main types of RTOS:
+      </p>
+      <ul>
+       <li>
+        <strong>
+         Hard RTOS:
+        </strong>
+        Guarantees task completion by deadlines; failure is critical (e.g., pacemakers, airbag systems)
+       </li>
+       <li>
+        <strong>
+         Soft RTOS:
+        </strong>
+        Tolerates occasional missed deadlines (e.g., video streaming, online gaming)
+       </li>
+      </ul>
+     </div>
+     <div class="advantages-disadvantages">
+      <div class="advantages">
+       <h3>
+        Advantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Determinism:
+         </strong>
+         Predictable response times
+        </li>
+        <li>
+         <strong>
+          Reliability:
+         </strong>
+         High system stability for critical applications
+        </li>
+        <li>
+         <strong>
+          Priority Handling:
+         </strong>
+         Efficiently manages task priorities
+        </li>
+        <li>
+         <strong>
+          Low Latency:
+         </strong>
+         Minimizes response delay
+        </li>
+       </ul>
+      </div>
+      <div class="disadvantages">
+       <h3>
+        Disadvantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Limited Features:
+         </strong>
+         Fewer capabilities than general-purpose OS
+        </li>
+        <li>
+         <strong>
+          Development Complexity:
+         </strong>
+         More challenging to program for
+        </li>
+        <li>
+         <strong>
+          Resource Constraints:
+         </strong>
+         Often runs on limited hardware
+        </li>
+        <li>
+         <strong>
+          Cost:
+         </strong>
+         Development and certification can be expensive
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="examples">
+      <h3>
+       Examples:
+      </h3>
+      <p>
+       FreeRTOS, VxWorks, RTLinux, QNX, INTEGRITY RTOS
+      </p>
+      <div class="tags">
+       <span class="tag">
+        Embedded Systems
+       </span>
+       <span class="tag">
+        Deterministic
+       </span>
+       <span class="tag">
+        Mission Critical
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="os-section">
+    <div class="section-title" onclick="toggleSection(this.parentElement)">
+     6. Mobile Operating System
+    </div>
+    <div class="section-content">
+     <p>
+      Mobile OS is designed for smartphones and tablets. It supports wireless communication, touch input, limited memory, and power management. These systems handle app management, security, and sensor integration.
+     </p>
+     <p>
+      Modern mobile operating systems are complex environments that balance performance with energy efficiency and provide rich user experiences through intuitive interfaces.
+     </p>
+     <div class="advantages-disadvantages">
+      <div class="advantages">
+       <h3>
+        Advantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          User-Friendly Interface:
+         </strong>
+         Intuitive touch-based interaction
+        </li>
+        <li>
+         <strong>
+          Energy Efficiency:
+         </strong>
+         Optimized for battery-powered devices
+        </li>
+        <li>
+         <strong>
+          App Ecosystem:
+         </strong>
+         Rich marketplace of applications
+        </li>
+        <li>
+         <strong>
+          Connectivity:
+         </strong>
+         Seamless integration with wireless networks
+        </li>
+       </ul>
+      </div>
+      <div class="disadvantages">
+       <h3>
+        Disadvantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Limited Multitasking:
+         </strong>
+         Restricted compared to desktop OS
+        </li>
+        <li>
+         <strong>
+          Security Vulnerabilities:
+         </strong>
+         Susceptible to mobile-specific attacks
+        </li>
+        <li>
+         <strong>
+          Hardware Limitations:
+         </strong>
+         Constrained by device capabilities
+        </li>
+        <li>
+         <strong>
+          Battery Dependency:
+         </strong>
+         Performance affected by power constraints
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="examples">
+      <h3>
+       Examples:
+      </h3>
+      <p>
+       Android (Google), iOS (Apple), HarmonyOS (Huawei), KaiOS (for feature phones)
+      </p>
+      <div class="tags">
+       <span class="tag">
+        Smartphones
+       </span>
+       <span class="tag">
+        Tablets
+       </span>
+       <span class="tag">
+        Touch Interface
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="os-section">
+    <div class="section-title" onclick="toggleSection(this.parentElement)">
+     7. Embedded Operating System
+    </div>
+    <div class="section-content">
+     <p>
+      Embedded OS runs on devices that perform specific tasks — like washing machines, microwave ovens, routers, or industrial robots. These OS are lightweight and tailored to hardware constraints.
+     </p>
+     <p>
+      They often run one application repeatedly and must be reliable and fast. Embedded OS frequently combines with real-time capabilities for time-sensitive applications.
+     </p>
+     <div class="highlight">
+      <p>
+       With the growth of IoT (Internet of Things), embedded operating systems are becoming increasingly important in connecting everyday objects to networks and the internet.
+      </p>
+     </div>
+     <div class="advantages-disadvantages">
+      <div class="advantages">
+       <h3>
+        Advantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Low Power Consumption:
+         </strong>
+         Optimized for energy efficiency
+        </li>
+        <li>
+         <strong>
+          Fast Boot Time:
+         </strong>
+         Quick startup for immediate operation
+        </li>
+        <li>
+         <strong>
+          Reliability:
+         </strong>
+         Stable for continuous operation
+        </li>
+        <li>
+         <strong>
+          Task-Specific:
+         </strong>
+         Optimized for their dedicated function
+        </li>
+       </ul>
+      </div>
+      <div class="disadvantages">
+       <h3>
+        Disadvantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Limited Functionality:
+         </strong>
+         Designed for specific tasks only
+        </li>
+        <li>
+         <strong>
+          Hardware Dependency:
+         </strong>
+         Tightly coupled with specific hardware
+        </li>
+        <li>
+         <strong>
+          Update Difficulty:
+         </strong>
+         Often challenging to update or upgrade
+        </li>
+        <li>
+         <strong>
+          Development Complexity:
+         </strong>
+         Requires specialized knowledge
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="examples">
+      <h3>
+       Examples:
+      </h3>
+      <p>
+       Embedded Linux, TinyOS, Contiki, RIOT OS, Zephyr, Amazon FreeRTOS
+      </p>
+      <div class="tags">
+       <span class="tag">
+        IoT
+       </span>
+       <span class="tag">
+        Specialized Hardware
+       </span>
+       <span class="tag">
+        Resource Constrained
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="os-section">
+    <div class="section-title" onclick="toggleSection(this.parentElement)">
+     8. Cloud Operating System
+    </div>
+    <div class="section-content">
+     <p>
+      Cloud OS is a relatively new category that manages cloud infrastructure and provides services to users over the internet. It abstracts physical hardware resources and offers them as virtualized services.
+     </p>
+     <p>
+      These operating systems are designed to manage large-scale distributed resources and provide scalable, on-demand computing capabilities. They are the foundation of modern cloud computing infrastructure.
+     </p>
+     <div class="advantages-disadvantages">
+      <div class="advantages">
+       <h3>
+        Advantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Scalability:
+         </strong>
+         Easily scales resources up or down
+        </li>
+        <li>
+         <strong>
+          Accessibility:
+         </strong>
+         Available from anywhere with internet
+        </li>
+        <li>
+         <strong>
+          Cost-Effective:
+         </strong>
+         Pay-as-you-go model reduces expenses
+        </li>
+        <li>
+         <strong>
+          Resource Pooling:
+         </strong>
+         Efficient sharing of computing resources
+        </li>
+       </ul>
+      </div>
+      <div class="disadvantages">
+       <h3>
+        Disadvantages:
+       </h3>
+       <ul>
+        <li>
+         <strong>
+          Internet Dependency:
+         </strong>
+         Requires stable connection
+        </li>
+        <li>
+         <strong>
+          Security Concerns:
+         </strong>
+         Data vulnerability in shared environments
+        </li>
+        <li>
+         <strong>
+          Limited Control:
+         </strong>
+         Less control over underlying hardware
+        </li>
+        <li>
+         <strong>
+          Learning Curve:
+         </strong>
+         Requires specialized knowledge
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="examples">
+      <h3>
+       Examples:
+      </h3>
+      <p>
+       OpenStack, CloudStack, VMware vSphere, Microsoft Azure Stack, Google Anthos
+      </p>
+      <div class="tags">
+       <span class="tag">
+        Virtualization
+       </span>
+       <span class="tag">
+        IaaS
+       </span>
+       <span class="tag">
+        Elasticity
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <!-- References Section -->
+   <div class="reference">
+    <h3>
+     References and Further Reading
+    </h3>
+    <ul>
+     <li>
+      <a href="https://www.geeksforgeeks.org/types-of-operating-systems/" target="_blank">
+       GeeksforGeeks - Types of Operating Systems
+      </a>
+     </li>
+     <li>
+      <a href="https://www.tutorialspoint.com/operating_system/os_types.htm" target="_blank">
+       TutorialsPoint - Operating System Types
+      </a>
+     </li>
+     <li>
+      <a href="https://www.javatpoint.com/types-of-operating-system" target="_blank">
+       JavaTPoint - Types of Operating System
+      </a>
+     </li>
+     <li>
+      <a href="https://www.techtarget.com/whatis/definition/operating-system-OS" target="_blank">
+       TechTarget - Operating System Definition
+      </a>
+     </li>
+     <li>
+      <a href="https://www.ibm.com/topics/operating-systems" target="_blank">
+       IBM - Operating Systems Overview
+      </a>
+     </li>
+    </ul>
+   </div>
+  </div>
   <!-- Back to top button -->
-  <div class="back-to-top" id="backToTop">↑</div>
-
+  <div class="back-to-top" id="backToTop">
+   ↑
+  </div>
   <script>
-    // Toggle section expansion
+   // Toggle section expansion
     function toggleSection(element) {
       element.classList.toggle("active");
       
@@ -783,5 +2197,5 @@
       }
     });
   </script>
-</body>
+ </body>
 </html>
