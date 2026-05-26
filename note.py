@@ -1,1 +1,0 @@
-#this is our code for the note class
